@@ -1,0 +1,10 @@
+export { default as calendar } from "./calendar-days-solid.svg";
+export { default as estadistics } from "./chart-simple-solid.svg";
+export { default as circlecheck } from "./circle-check-regular.svg";
+export { default as gear } from "./gear-solid.svg";
+export { default as house } from "./house-solid.svg";
+export { default as pensquare } from "./pen-to-square-solid.svg";
+export { default as qrcode } from "./qrcode-solid.svg";
+export { default as userplus } from "./user-plus-solid.svg";
+export { default as users } from "./users-solid.svg";
+export { default as user } from "./user-solid.svg";

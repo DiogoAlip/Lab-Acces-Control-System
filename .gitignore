@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+node-v20.12.2-linux-x64
 node_modules
 dist
 dist-ssr

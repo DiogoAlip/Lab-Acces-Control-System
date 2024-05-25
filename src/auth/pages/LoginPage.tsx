@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { user } from "../../assets";
 import { fingerprint, lock } from "../assets";
 import { useUserLogin } from "../hooks/useUserLoginReducer";
+import { useLocation } from "wouter";
+import { AuthContext } from "../context";
 
 export const LoginPage = () => {
   const [RememberPassw, setRememberPassw] = useState(false);
@@ -9,6 +11,8 @@ export const LoginPage = () => {
     name: "",
     passwd: "",
   });
+  const [, setLocation] = useLocation();
+  const { login } = useContext(AuthContext);
 
   const onClickUserLogin = ({
     target: { value, name },
@@ -16,7 +20,17 @@ export const LoginPage = () => {
     target: { value: string; name: string };
   }) => {
     onSetUserLogin({ ...UserLogin, [name]: value });
-    console.log();
+  };
+
+  const onClickStartSession = ({
+    name,
+    passwd,
+  }: {
+    name: string;
+    passwd: string;
+  }) => {
+    login();
+    setLocation(`/dashboard/${name}/${passwd}`);
   };
 
   return (
@@ -26,7 +40,13 @@ export const LoginPage = () => {
         <form
           className="login"
           action=""
-          onSubmit={() => console.log("sending . . .")}
+          onSubmit={(e) => {
+            e.preventDefault();
+            onClickStartSession({
+              name: UserLogin.name,
+              passwd: UserLogin.passwd,
+            });
+          }}
         >
           <div className="name-container">
             <div className="little-image_container">
@@ -65,7 +85,16 @@ export const LoginPage = () => {
             </div>
             <a href="safari.com">¿Olvido su contraseña?</a>
           </div>
-          <button>Iniciar Session</button>
+          <button
+            onClick={() =>
+              onClickStartSession({
+                name: UserLogin.name,
+                passwd: UserLogin.passwd,
+              })
+            }
+          >
+            Iniciar Session
+          </button>
         </form>
       </div>
     </div>

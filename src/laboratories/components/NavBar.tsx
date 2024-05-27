@@ -9,12 +9,15 @@ const StringsArr = [
 ];
 export const NavBar = () => {
   return (
-    <nav>
-      {StringsArr.map((link, linkIndex) => (
-        <LinkItem href={`${link.route}`} key={`${linkIndex}${link.route}`}>
-          <img className="little-image" src={`${link.image}`} />
-        </LinkItem>
-      ))}
-    </nav>
+    <>
+      <nav>
+        {StringsArr.map((link, linkIndex) => (
+          <LinkItem href={`${link.route}`} key={`${linkIndex}${link.route}`}>
+            <img className="little-image" src={`${link.image}`} />
+          </LinkItem>
+        ))}
+      </nav>
+      <div className="realative-box"></div>
+    </>
   );
 };

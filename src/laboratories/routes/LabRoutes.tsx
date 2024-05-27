@@ -25,9 +25,7 @@ export const LabRoutes = () => {
         <SchedulePage />
       </Route>
       <Route>
-        <h1>404</h1>
-        <h1>PAGE NOT FOUND</h1>
-        <h2></h2>
+        <Redirect to="/home" />
       </Route>
     </Switch>
   );

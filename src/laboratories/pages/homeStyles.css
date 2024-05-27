@@ -1,0 +1,280 @@
+.container {
+  border-radius: 50px;
+  border: 2px solid rgba(0, 0, 0, 1);
+  background-color: rgba(170, 236, 236, 0.4);
+  display: flex;
+  max-width: 480px;
+  width: 100%;
+  padding-bottom: 9px;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.header-section {
+  border-radius: 0;
+  background-color: rgba(12, 93, 112, 0.35);
+  border: 2px solid rgba(156, 171, 194, 0.35);
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 19px 24px 30px 11px;
+  box-sizing: border-box;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+}
+
+.greeting-section {
+  display: flex;
+  gap: 11px;
+  color: #000;
+  font-weight: 600;
+  justify-content: center;
+  gap: 30px;
+}
+
+.profile-image {
+  aspect-ratio: 1;
+  object-fit: auto;
+  object-position: center;
+  width: 72px;
+  fill: url(<path-to-image>) lightgray 50% / cover no-repeat;
+  margin: auto 0;
+  object-fit: contain;
+  width: 84px;
+}
+
+.greetings {
+  display: flex;
+  flex-direction: column;
+}
+
+.line-height-0 {
+  line-height: 0;
+}
+
+.greeting-title {
+  align-self: center;
+  font: 22px Roboto, sans-serif;
+  line-height: 0;
+}
+
+.greeting-message {
+  margin-top: 5px;
+  font: 15px Roboto, sans-serif;
+  line-height: 0;
+}
+
+.separator {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 5px;
+  margin-bottom: 6px;
+}
+
+.user-name {
+  margin-top: 6px;
+  font: 13px Roboto, sans-serif;
+  line-height: 0;
+}
+
+.user-title {
+  margin-top: 5px;
+  font: 12px Roboto, sans-serif;
+  line-height: 0;
+}
+
+.requests-section {
+  display: flex;
+  margin-top: 34px;
+  width: 100%;
+  flex-direction: column;
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
+.requests-title {
+  color: #000;
+  font: 600 22px Roboto, sans-serif;
+}
+
+.requests-separator {
+  margin-top: 11px;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 5px;
+}
+
+.text-section {
+  border-radius: 40px;
+  background-color: rgba(137, 209, 232, 1);
+  border: 2px solid rgba(0, 0, 0, 1);
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 6px 22px 6px 7px;
+}
+
+.text-info {
+  display: flex;
+  gap: 7px;
+  font-size: 10px;
+  color: #000;
+  gap: 10px;
+}
+
+.text-icon {
+  object-fit: auto;
+  object-position: center;
+  width: 60px;
+  height: 60px;
+  fill: url(<path-to-image>) lightgray 50% / cover no-repeat;
+  stroke-width: 2px;
+  stroke: #000;
+  border-radius: 50%;
+  border: 2px solid #000;
+}
+
+.text-details {
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+}
+
+.text-title {
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+  line-height: 0;
+}
+
+.text-description {
+  font-family: Roboto, sans-serif;
+  font-style: italic;
+  font-weight: 800;
+  display: flex;
+  gap: 30px;
+}
+
+.text-description p {
+  line-height: 0;
+}
+
+.text-actions {
+  display: flex;
+  gap: 13px;
+  margin: auto 0;
+}
+
+.task-icon {
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 1);
+  background-color: #f53939;
+  width: 30px;
+  height: 30px;
+}
+
+.large-request-icon {
+  aspect-ratio: 1.03;
+  object-fit: auto;
+  object-position: center;
+  width: 31px;
+}
+
+.attendance-title {
+  color: #000;
+  margin-top: 37px;
+  font: 600 22px Roboto, sans-serif;
+}
+
+.attendance-separator {
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 12px;
+  height: 5px;
+}
+
+.laboratories-section {
+  border-radius: 45px;
+  background-color: rgba(156, 171, 194, 0.35);
+  border: 2px solid rgba(0, 0, 0, 1);
+  display: flex;
+  margin-top: 14px;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 600;
+  padding: 13px 21px;
+  box-sizing: border-box;
+}
+
+.laboratories-title {
+  color: #000;
+  font: italic 16px Roboto, sans-serif;
+}
+
+.labs-image {
+  aspect-ratio: 2.78;
+  object-fit: auto;
+  object-position: center;
+  width: 269px;
+  margin-top: 11px;
+}
+
+.labs-info {
+  display: flex;
+  margin-top: 9px;
+  gap: 20px;
+  font-size: 10px;
+  color: var(--Gray-04, #666);
+  text-align: right;
+}
+
+.lab-item {
+  font-family: Roboto, sans-serif;
+  font-style: italic;
+  flex-grow: 1;
+}
+
+.modal-container {
+  display: flex;
+  position: absolute;
+  z-index: 30;
+}
+
+.modal {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  width: 375px;
+  height: auto;
+  padding: 30px 10px;
+  box-sizing: border-box;
+  background-color: #89d1e8;
+  border-radius: 30px;
+  border: 2px solid #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+button {
+  border-radius: 20px;
+  border: 2px solid #93c1c7;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 900;
+  font-family: inherit;
+  background-color: #bbfeff;
+  cursor: pointer;
+}
+button:hover {
+  border-color: #31abc8;
+}
+
+[role="button"] {
+  cursor: pointer;
+}

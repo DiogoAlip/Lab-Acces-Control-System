@@ -1,0 +1,164 @@
+.profile-card {
+  background-color: rgba(170, 236, 236, 0.4);
+  display: flex;
+  width: 100%;
+  padding-bottom: 14px;
+  flex-direction: column;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.perfil_header-section {
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  border: 2px solid rgba(156, 171, 194, 0.35);
+  background-color: rgba(12, 93, 112, 0.35);
+  display: flex;
+  width: 100%;
+  align-items: start;
+  gap: 20px;
+  font-size: 28px;
+  justify-content: center;
+  padding: 12px 27px 39px 6px;
+  box-sizing: border-box;
+}
+
+.perfil_profile-image {
+  aspect-ratio: 2.56;
+  object-fit: auto;
+  width: 54px;
+  box-sizing: border-box;
+}
+
+.settings-section {
+  display: flex;
+  margin-top: 5px;
+  flex-direction: column;
+  width: 90%;
+}
+
+.settings-icon {
+  aspect-ratio: 5.56;
+  object-fit: auto;
+  width: 66px;
+  align-self: end;
+}
+
+.settings-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 26px;
+  gap: 20px;
+}
+
+.settings-text {
+  font-family: Roboto, sans-serif;
+  flex-grow: 1;
+  font-weight: 600;
+  text-align: center;
+}
+
+.settings-image {
+  aspect-ratio: 1.06;
+  object-fit: auto;
+  width: 32px;
+}
+
+.details-section {
+  display: flex;
+  flex-direction: column;
+  padding: 0 35px;
+  width: 100%;
+  margin-top: 19px;
+  box-sizing: border-box;
+}
+
+.name-section {
+  display: flex;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.name-image {
+  aspect-ratio: 0.97;
+  object-fit: auto;
+  width: 72px;
+}
+
+.name-info {
+  align-self: start;
+  display: flex;
+  margin-top: 12px;
+  flex-direction: column;
+}
+
+.label {
+  color: #616161;
+  font-size: 18px;
+  font-family: Roboto, sans-serif;
+}
+
+.value {
+  color: #000;
+  margin-top: 5px;
+  font-size: 15px;
+  font-family: Roboto, sans-serif;
+}
+
+.biography,
+.phone,
+.job-area,
+.branch,
+.degree,
+.integration-date {
+  color: #616161;
+  margin-top: 18px;
+  font-size: 18px;
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+}
+
+.biography-value,
+.phone-value,
+.job-area-value,
+.branch-value,
+.degree-value,
+.integration-date-value {
+  color: #000;
+  margin-top: 7px;
+  font-size: 15px;
+  font-family: Roboto, sans-serif;
+  font-weight: 600;
+}
+
+.contact-images {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  margin: 69px 0 0 11px;
+}
+
+.contact-image-large {
+  aspect-ratio: 7.14;
+  object-fit: auto;
+  width: 224px;
+  align-self: start;
+}
+
+.contact-image-small {
+  aspect-ratio: 1;
+  object-fit: auto;
+  width: 32px;
+}
+
+.navigation-indicator {
+  border-radius: 100px;
+  background-color: var(
+    --bottom-navigation-bottom-navigation-selected-color,
+    #000
+  );
+  align-self: center;
+  margin-top: 39px;
+  width: 134px;
+  height: 5px;
+}

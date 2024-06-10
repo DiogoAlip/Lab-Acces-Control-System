@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { user } from "../../assets";
-import { fingerprint, lock } from "../assets";
+import { lock } from "../assets";
 import { useUserLogin } from "../hooks/useUserLoginReducer";
-import { useLocation } from "wouter";
+import { Link, useLocation } from "wouter";
 import { AuthContext } from "../context";
 
 export const LoginPage = () => {
@@ -29,14 +29,31 @@ export const LoginPage = () => {
     name: string;
     passwd: string;
   }) => {
+    if (name.length <= 8 && passwd.length <= 8) {
+      window.alert("Tanto nombre como contraseña son muy cortos");
+      return;
+    } else if (name.length <= 8) {
+      window.alert("El nombre es muy corto");
+      return;
+    } else if (passwd.length <= 8) {
+      window.alert("La constraseña es muy corta");
+      return;
+    }
     login();
     setLocation(`/dashboard/${name}/${passwd}`);
   };
 
   return (
     <div className="login-modal_container">
+      <header className="header login-header">
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/835f3315e241fe0b7aafd9b6af9992b097649fc0232423055b703ef15a3b9eed?apiKey=d337f2d517f4408a99dd126ae7e4b446&"
+          alt=""
+          className="main-image"
+        />
+      </header>
       <div className="login-modal">
-        <img className="big-image" src={fingerprint} alt="scan your qrcode" />
         <form
           className="login"
           action=""
@@ -83,7 +100,7 @@ export const LoginPage = () => {
               />
               <p>Recordar contraseña</p>
             </div>
-            <a href="safari.com">¿Olvido su contraseña?</a>
+            <Link to="/register">¿Olvido su contraseña?</Link>
           </div>
           <button
             onClick={() =>

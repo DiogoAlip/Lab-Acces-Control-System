@@ -1,0 +1,98 @@
+.register-container {
+  border-radius: 50px;
+  background-color: rgba(170, 236, 236, 0.4);
+  display: flex;
+  width: 100%;
+  padding-bottom: 11px;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+  height: 98vh;
+}
+
+.header {
+  background-color: rgba(12, 93, 112, 0.35);
+  border: 2px solid rgba(156, 171, 194, 0.35);
+  align-self: stretch;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 17px 0px;
+  box-sizing: border-box;
+  border-bottom-left-radius: 70px;
+  border-bottom-right-radius: 70px;
+}
+
+.logo-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.logo-one {
+  aspect-ratio: 2.56;
+  object-fit: auto;
+  object-position: center;
+  width: 54px;
+}
+
+.logo-two {
+  aspect-ratio: 5.56;
+  object-fit: auto;
+  object-position: center;
+  width: 66px;
+  margin: auto 0;
+}
+
+.main-image {
+  aspect-ratio: 1;
+  object-fit: auto;
+  object-position: center;
+  width: 110px;
+  align-self: center;
+  z-index: 10;
+  max-width: 100%;
+  margin: 120px 0 -60px;
+}
+
+.title {
+  color: #000;
+  margin-top: 60px;
+  font: 700 22px Roboto, sans-serif;
+}
+
+.description {
+  color: #000;
+  text-align: center;
+  width: 265px;
+  font: italic 500 15px Roboto, sans-serif;
+}
+
+.input-container {
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 1);
+  background-color: var(--grey-white, #fff);
+  display: flex;
+  font-size: 16px;
+  color: #868686;
+  font-weight: 400;
+  padding: 12px 8px;
+  margin: 10px 0px 20px 0px;
+}
+
+.input-icon {
+  aspect-ratio: 1;
+  object-fit: auto;
+  object-position: center;
+  width: 22px;
+  stroke-width: 2px;
+  border-radius: 50%;
+}
+
+.placeholder-text {
+  font-family: Roboto, sans-serif;
+  font-style: italic;
+  flex-grow: 1;
+  flex-basis: auto;
+}

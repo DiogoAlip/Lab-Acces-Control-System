@@ -176,3 +176,25 @@ input:focus {
 .login-options-remember input {
   width: auto;
 }
+
+/*Common Use Classes*/
+
+.separator {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 5px;
+  margin-bottom: 6px;
+}
+
+.separator100 {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 5px;
+  margin-bottom: 6px;
+}
+
+.separator80 {
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 5px;
+  margin-bottom: 6px;
+}

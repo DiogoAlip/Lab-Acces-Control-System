@@ -274,7 +274,3 @@ button {
 button:hover {
   border-color: #31abc8;
 }
-
-[role="button"] {
-  cursor: pointer;
-}

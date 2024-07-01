@@ -20,25 +20,20 @@
 .lab-info {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 8.32;
-  width: 316px;
+  width: 340px;
   max-width: 100%;
   margin-top: 11px;
   padding: 13px 25px;
   color: #000;
   font: 600 14px Roboto, sans-serif;
-}
-
-.lab-info-bg {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
+  outline-width: 0px;
+  border: 2px solid #000;
+  border-radius: 20px;
 }
 
 .lab-info-text {
   position: relative;
+  width: 100px;
 }
 
 .date-range {
@@ -53,7 +48,8 @@
   border: 2px solid #000;
   padding: 34px 17px 34px 37px;
   margin-top: 17px;
-  width: 100%;
+  width: 80%;
+  max-width: 360px;
 }
 
 .stats-header {

@@ -18,14 +18,26 @@ export const EstadisticPage = () => {
       <main className="petitions-content">
         <h2 className="section-title">Laboratorios</h2>
         <div className="separator100"></div>
-        <div className="lab-info">
-          <img
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/af98a29c3312ec7cd85cc4a3b74bb82dbb978d8a9530fb96e6c10b97b78dc0ad?apiKey=d337f2d517f4408a99dd126ae7e4b446&"
-            alt=""
-            className="lab-info-bg"
-          />
-          <p className="lab-info-text">Laboratorio de Redes y Conectividad I</p>
-        </div>
+        <select name="laboratories" id="laboratories" className="lab-info">
+          <option className="lab-info-text">
+            Laboratorio de Redes y Conectividad I
+          </option>
+          <option className="lab-info-text" value="">
+            Laboratorio de Redes II
+          </option>
+          <option className="lab-info-text" value="">
+            Laboratorio de Ciberseguridad
+          </option>
+          <option className="lab-info-text" value="">
+            Laboratorio de Estadistica y Simulacion Matematica
+          </option>
+          <option className="lab-info-text" value="">
+            Laboratorio de Software
+          </option>
+          <option className="lab-info-text" value="">
+            Laboratorio de Simulacion Empresarial
+          </option>
+        </select>
         <p className="date-range">JULIO 1 - 7</p>
 
         <section className="stats-container">

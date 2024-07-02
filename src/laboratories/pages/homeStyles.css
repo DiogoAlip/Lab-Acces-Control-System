@@ -64,12 +64,6 @@
   line-height: 0;
 }
 
-.separator {
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 5px;
-  margin-bottom: 6px;
-}
-
 .user-name {
   margin-top: 6px;
   font: 13px Roboto, sans-serif;
@@ -84,6 +78,7 @@
 
 .requests-section {
   display: flex;
+  justify-content: center;
   margin-top: 34px;
   width: 100%;
   flex-direction: column;
@@ -194,8 +189,9 @@
   background-color: rgba(156, 171, 194, 0.35);
   border: 2px solid rgba(0, 0, 0, 1);
   display: flex;
-  margin-top: 14px;
+  margin: 14px auto 20px auto;
   width: 100%;
+  max-width: 400px;
   flex-direction: column;
   align-items: center;
   font-weight: 600;
@@ -218,7 +214,6 @@
 
 .labs-info {
   display: flex;
-  margin-top: 9px;
   gap: 20px;
   font-size: 10px;
   color: var(--Gray-04, #666);

@@ -6,13 +6,13 @@ import { AuthRoute } from "../auth/components/AuthRoute";
 import { RegisterPage } from "../laboratories/pages/RegisterPage";
 export const AppRouter = () => {
   return (
-    <AuthProvider>
+    <AuthProvider userName="" userPassword="">
       <Switch>
         <Route path="login">
           <LoginPage />
         </Route>
         <AuthRoute
-          path="dashboard/:name/:passwd"
+          path="dashboard/"
           redirectTo="login"
           component={LogedUserPage}
           nest
@@ -21,7 +21,7 @@ export const AppRouter = () => {
           <RegisterPage />
         </Route>
         <Route path="/*">
-          <Redirect to="login" replace />
+          <Redirect to="/login" />
         </Route>
       </Switch>
     </AuthProvider>

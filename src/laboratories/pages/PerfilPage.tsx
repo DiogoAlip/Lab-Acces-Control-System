@@ -1,5 +1,8 @@
+import { useContext } from "react";
 import "./perfilStyles.css";
+import { AuthContext } from "../../auth/context";
 export const PerfilPage = () => {
+  const { userName } = useContext(AuthContext);
   return (
     <div className="profile-card">
       <header className="perfil_header-section">
@@ -24,7 +27,7 @@ export const PerfilPage = () => {
           />
           <div className="name-info">
             <div className="label">Nombre(s) y apellidos:</div>
-            <div className="value">William Marchand Niño</div>
+            <div className="value">{userName}</div>
           </div>
         </div>
         <div className="biography">Biografia:</div>

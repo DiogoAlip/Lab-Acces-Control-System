@@ -1,0 +1,239 @@
+.calendar-container {
+  background-color: rgba(170, 236, 236, 0.4);
+  display: flex;
+  width: 100%;
+  padding-bottom: 14px;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.menu-icon {
+  aspect-ratio: 2.56;
+  object-fit: auto;
+  object-position: center;
+  width: 54px;
+}
+
+.header-content {
+  display: flex;
+  margin-top: 5px;
+  flex-direction: column;
+}
+
+.notification-icon {
+  aspect-ratio: 5.56;
+  object-fit: auto;
+  object-position: center;
+  width: 66px;
+  align-self: end;
+}
+
+.month-name {
+  margin-top: 35px;
+}
+
+.main-content {
+  box-sizing: border-box;
+  display: flex;
+  margin-top: 14px;
+  width: 100%;
+  flex-direction: column;
+  color: #000;
+  padding: 0 30px;
+}
+
+.weekdays {
+  width: 100%;
+  max-width: 400px;
+  align-self: center;
+  display: flex;
+  gap: 18px;
+  font: 600 12px Roboto, sans-serif;
+  position: sticky;
+  justify-content: space-between;
+}
+
+.weekday {
+  text-align: center;
+}
+
+.section-title {
+  margin-top: 69px;
+  font: 600 22px Roboto, sans-serif;
+}
+
+.divider {
+  background-color: #000;
+  margin-top: 14px;
+  height: 5px;
+}
+
+.activity-card {
+  border-radius: 20px;
+  background-color: rgba(139, 224, 251, 0.6);
+  border: 2px solid #000;
+  display: flex;
+  margin-top: 10px;
+  width: 100%;
+  flex-direction: column;
+  padding: 10px 6px;
+}
+
+.activity-header {
+  display: flex;
+  gap: 3px;
+  font-weight: 600;
+}
+
+.profile-image {
+  aspect-ratio: 1;
+  object-fit: cover;
+  width: 59px;
+  border: 2px solid #000;
+  border-radius: 50%;
+}
+
+.activity-details {
+  display: flex;
+  flex-direction: column;
+  margin: auto 0;
+}
+
+.instructor-name {
+  font: 13px Roboto, sans-serif;
+}
+
+.course-name {
+  font: 12px Roboto, sans-serif;
+}
+
+.activity-description {
+  margin-top: 5px;
+  font: italic 10px Roboto, sans-serif;
+}
+
+.activity-time {
+  border-radius: 18px;
+  background-color: #89d1e8;
+  border: 2px solid #000;
+  display: flex;
+  margin-top: 11px;
+  align-items: center;
+  gap: 20px;
+  font: italic 700 15px Roboto, sans-serif;
+  justify-content: space-between;
+  padding: 13px 21px;
+}
+
+.time-slot {
+  align-self: stretch;
+  margin: auto 0;
+}
+
+.location {
+  align-self: stretch;
+  margin: auto 0;
+}
+
+.action-icon {
+  aspect-ratio: 1;
+  object-fit: auto;
+  object-position: center;
+  width: 24px;
+  align-self: stretch;
+}
+
+.more-indicator {
+  aspect-ratio: 0.29;
+  object-fit: auto;
+  object-position: center;
+  width: 10px;
+  align-self: center;
+  margin-top: 9px;
+}
+
+.requests-section {
+  display: flex;
+  margin-top: 24px;
+  width: 100%;
+  flex-direction: column;
+  padding: 0 30px;
+}
+
+.request-card {
+  border-radius: 20px;
+  background-color: rgba(139, 224, 251, 0.6);
+  border: 2px solid #000;
+  display: flex;
+  margin-top: 10px;
+  width: 100%;
+  flex-direction: column;
+  color: #000;
+  padding: 11px 6px;
+}
+
+.request-time {
+  border-radius: 18px;
+  background-color: #89d1e8;
+  border: 2px solid #000;
+  display: flex;
+  margin-top: 10px;
+  gap: 18px;
+  font: italic 700 15px Roboto, sans-serif;
+  padding: 10px 10px 10px 21px;
+}
+
+.request-location {
+  align-self: start;
+  margin-top: 11px;
+}
+
+.action-button {
+  aspect-ratio: 1;
+  object-fit: auto;
+  object-position: center;
+  width: 30px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  height: 30px;
+}
+
+.reject-button {
+  background-color: #f53939;
+}
+
+.accept-button {
+  background-color: rgba(0, 255, 71, 0.77);
+}
+
+.action-bar {
+  align-self: center;
+  display: flex;
+  margin-top: 20px;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.action-menu {
+  aspect-ratio: 7.69;
+  object-fit: auto;
+  object-position: center;
+  width: 224px;
+  align-self: start;
+}
+
+.add-button {
+  aspect-ratio: 1;
+  object-fit: auto;
+  object-position: center;
+  width: 32px;
+}
+
+.bottom-indicator {
+  border-radius: 100px;
+  background-color: #000;
+  align-self: center;
+  margin-top: 39px;
+  width: 134px;
+  height: 5px;
+}

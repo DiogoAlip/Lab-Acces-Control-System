@@ -2,8 +2,8 @@ import { useContext, useState } from "react";
 import { user } from "../../assets";
 import { lock } from "../assets";
 import { useUserLogin } from "../hooks/useUserLoginReducer";
-import { Link, useLocation } from "wouter";
 import { AuthContext } from "../context";
+import { Link, useLocation } from "wouter";
 
 export const LoginPage = () => {
   const [RememberPassw, setRememberPassw] = useState(false);
@@ -39,8 +39,8 @@ export const LoginPage = () => {
       window.alert("La constraseña es muy corta");
       return;
     }
-    login();
-    setLocation(`/dashboard/${name}/${passwd}`);
+    login(name, passwd);
+    setLocation(`dashboard/`);
   };
 
   return (

@@ -55,7 +55,7 @@ export const HomePage = () => {
       </section>
       <section className="requests-section">
         <h2 className="requests-title">Peticiones</h2>
-        <div className="requests-separator"></div>
+        <div className="separator100"></div>
 
         <PetitionsItem
           textItem="Recuperacion de la quinta sesion"

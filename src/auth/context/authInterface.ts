@@ -1,5 +1,7 @@
 export interface AuthContextType {
   isAuthenticated: boolean;
-  login: () => void;
+  login: (newUserName: string, NewUserPaswd: string) => void;
   logout: () => void;
+  userName: string;
+  userPassword: string;
 }

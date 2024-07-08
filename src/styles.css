@@ -198,3 +198,35 @@ input:focus {
   height: 5px;
   margin-bottom: 6px;
 }
+
+.select-info {
+  position: relative;
+  overflow: hidden;
+  width: 340px;
+  max-width: 100%;
+  margin-top: 11px;
+  padding: 13px 20px;
+  color: #000;
+  font: 600 14px Roboto, sans-serif;
+  outline-width: 0px;
+  border: 2px solid #000;
+  border-radius: 20px;
+}
+
+.select-info-litle {
+  position: relative;
+  overflow: hidden;
+  width: 140px;
+  max-width: 100%;
+  padding: 8px 10px;
+  color: #000;
+  font: 600 14px Roboto, sans-serif;
+  outline-width: 0px;
+  border: 1px solid #000;
+  border-radius: 20px;
+}
+
+.info-text {
+  position: relative;
+  width: 100px;
+}

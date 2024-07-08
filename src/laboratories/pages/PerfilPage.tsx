@@ -1,8 +1,13 @@
 import { useContext } from "react";
-import "./perfilStyles.css";
 import { AuthContext } from "../../auth/context";
+import "./perfilStyles.css";
+import { LanguageContext } from "../context/LanguageContext";
 export const PerfilPage = () => {
   const { userName } = useContext(AuthContext);
+  const { language, LanguageChager } = useContext(LanguageContext);
+  const onChangeLanguage = (e: { target: { value: string } }) => {
+    LanguageChager(e.target.value);
+  };
   return (
     <div className="profile-card">
       <header className="perfil_header-section">
@@ -26,7 +31,7 @@ export const PerfilPage = () => {
             className="name-image"
           />
           <div className="name-info">
-            <div className="label">Nombre(s) y apellidos:</div>
+            <div className="label">Nombre(s) y Apellido(s):</div>
             <div className="value">{userName}</div>
           </div>
         </div>
@@ -46,6 +51,20 @@ export const PerfilPage = () => {
         </div>
         <div className="integration-date">Fecha de integracion:</div>
         <div className="integration-date-value">12/8/09</div>
+        <hr />
+        <div className="biography">
+          <p>Cambiar idioma:</p>
+          <select
+            value={language}
+            name="language"
+            id="language"
+            className="select-info-litle"
+            onChange={onChangeLanguage}
+          >
+            <option className="info-text">Español</option>
+            <option className="info-text">English</option>
+          </select>
+        </div>
       </section>
     </div>
   );

@@ -17,7 +17,7 @@
   align-self: stretch;
 }
 
-.lab-info {
+.select-info {
   position: relative;
   overflow: hidden;
   width: 340px;
@@ -31,7 +31,7 @@
   border-radius: 20px;
 }
 
-.lab-info-text {
+.info-text {
   position: relative;
   width: 100px;
 }

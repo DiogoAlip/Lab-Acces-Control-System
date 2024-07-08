@@ -18,23 +18,23 @@ export const EstadisticPage = () => {
       <main className="petitions-content">
         <h2 className="section-title">Laboratorios</h2>
         <div className="separator100"></div>
-        <select name="laboratories" id="laboratories" className="lab-info">
-          <option className="lab-info-text">
+        <select name="laboratories" id="laboratories" className="select-info">
+          <option className="info-text">
             Laboratorio de Redes y Conectividad I
           </option>
-          <option className="lab-info-text" value="">
+          <option className="info-text" value="">
             Laboratorio de Redes II
           </option>
-          <option className="lab-info-text" value="">
+          <option className="info-text" value="">
             Laboratorio de Ciberseguridad
           </option>
-          <option className="lab-info-text" value="">
+          <option className="info-text" value="">
             Laboratorio de Estadistica y Simulacion Matematica
           </option>
-          <option className="lab-info-text" value="">
+          <option className="info-text" value="">
             Laboratorio de Software
           </option>
-          <option className="lab-info-text" value="">
+          <option className="info-text" value="">
             Laboratorio de Simulacion Empresarial
           </option>
         </select>

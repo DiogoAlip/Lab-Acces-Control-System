@@ -1,12 +1,40 @@
 import { PetitionsItem } from "../components/PetitionsItem";
 import { NotificationModal } from "../components/NotificationModal";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./homeStyles.css";
+import { LanguageContext } from "../context/LanguageContext";
 export const HomePage = () => {
+  const { language } = useContext(LanguageContext);
   const [modalsBool, setModalsBool] = useState({
     acceptedPetittion: false,
     deniedPetittion: false,
   });
+
+  const SpanishWords = {
+    Continuar: "Continuar",
+    PeticionAceptada: "Peticion Aceptada",
+    PeticionDenegada: "Peticion Denegada",
+    BuenosDias: "¡Buenos Dias!",
+    Peticiones: "Peticiones",
+    RolSupervisordeLaboratorios: "Supervisor de laboratorios",
+    QueTienesPlaneadoParaHoy: "¿Qué tienes planeado para hoy?",
+    Asistencia: "Asistencia",
+    Laboratorios: "Laboratorios",
+  };
+
+  const EnglishWords = {
+    Continuar: "Continue",
+    PeticionAceptada: "Requests Acepted",
+    PeticionDenegada: "Requests Denied",
+    BuenosDias: "¡Good Morning!",
+    Peticiones: "Requests",
+    RolSupervisordeLaboratorios: "Laboratories Supervisor",
+    QueTienesPlaneadoParaHoy: "What do you have plain for today?",
+    Asistencia: "Asistences",
+    Laboratorios: "Laboratories",
+  };
+
+  const HomeWords = language === "Español" ? SpanishWords : EnglishWords;
 
   const setModalToDeafault = () =>
     setModalsBool({ acceptedPetittion: false, deniedPetittion: false });
@@ -22,7 +50,9 @@ export const HomePage = () => {
             alt=""
           />
           <h2>Peticion Aceptada</h2>
-          <button onClick={() => setModalToDeafault()}>Continuar</button>
+          <button onClick={() => setModalToDeafault()}>
+            {HomeWords.Continuar}
+          </button>
         </NotificationModal>
       )}
       {modalsBool.deniedPetittion && (
@@ -34,7 +64,9 @@ export const HomePage = () => {
             alt=""
           />
           <h2>Peticion Denegada</h2>
-          <button onClick={() => setModalToDeafault()}>Continuar</button>
+          <button onClick={() => setModalToDeafault()}>
+            {HomeWords.Continuar}
+          </button>
         </NotificationModal>
       )}
       <section className="header-section">
@@ -45,16 +77,20 @@ export const HomePage = () => {
             className="profile-image"
           />
           <div className="greetings">
-            <h2 className="greeting-title">¡Buenos Dias!</h2>
-            <p className="greeting-message">¿Qué tienes planeado para hoy?</p>
+            <h2 className="greeting-title">{HomeWords.BuenosDias}</h2>
+            <p className="greeting-message">
+              {HomeWords.QueTienesPlaneadoParaHoy}
+            </p>
             <div className="separator"></div>
             <p className="user-name">Ing. William Marchand Niño</p>
-            <p className="user-title">Supervisor de laboratorios</p>
+            <p className="user-title">
+              {HomeWords.RolSupervisordeLaboratorios}
+            </p>
           </div>
         </div>
       </section>
       <section className="requests-section">
-        <h2 className="requests-title">Peticiones</h2>
+        <h2 className="requests-title">{HomeWords.Peticiones}</h2>
         <div className="separator100"></div>
 
         <PetitionsItem
@@ -108,11 +144,11 @@ export const HomePage = () => {
           }
         />
 
-        <h2 className="attendance-title">Asistencia</h2>
+        <h2 className="attendance-title">{HomeWords.Asistencia}</h2>
         <div className="attendance-separator"></div>
 
         <div className="laboratories-section">
-          <h3 className="laboratories-title">Laboratorios</h3>
+          <h3 className="laboratories-title">{HomeWords.Laboratorios}</h3>
           <img
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/29064e08ec8f09edae68e47b0021b141ef1ce911d92319909381f74b14e43749?apiKey=d337f2d517f4408a99dd126ae7e4b446&"
             alt="Labs overview image"

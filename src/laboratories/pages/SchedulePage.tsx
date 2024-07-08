@@ -1,13 +1,57 @@
+import { useContext } from "react";
 import "./schedulesPage.css";
+import { LanguageContext } from "../context/LanguageContext";
 
 export const SchedulePage = () => {
-  const idioma = "es-ES";
+  const { language } = useContext(LanguageContext);
+  const idioma = language == "Español" ? "es-ES" : "en-EN";
   const fecha = new Date();
   const mes = fecha
     .toLocaleString(idioma, {
       month: "long",
     })
     .toUpperCase();
+
+  const SpanishWords = {
+    Lun: "Lun",
+    Mar: "Mar",
+    Mier: "Mier",
+    Jue: "Jue",
+    Vie: "Vie",
+    Sab: "Sab",
+    Dom: "Dom",
+    Laboratorios: "Laboratories",
+    LaboratoriodeRedesyConectividadI: "Networks and Connectivity Laboratory I",
+    LaboratoriodeRedesII: "Networks and Connectivity Laboratory I",
+    LaboratoriodeCiberseguridad: "Cybersecurity Lab",
+    LaboratoriodeEstadisticaySimulacionMatematica:
+      "Statistics and Mathematical Simulation Laboratory",
+    LaboratoriodeSoftware: "Software Laboratory",
+    LaboratoriodeSimulacionEmpresarial: "Business Simulation Laboratory",
+    Actividades: "Actividades",
+    Peticiones: "Peticiones",
+  };
+  const EnglishWords = {
+    Lun: "Mon",
+    Mar: "Tue",
+    Mier: "Wed",
+    Jue: "Thu",
+    Vie: "Fri",
+    Sab: "Sat",
+    Dom: "Sun",
+    Laboratorios: "Laboratories",
+    LaboratoriodeRedesyConectividadI: "Networks and Connectivity Laboratory I",
+    LaboratoriodeRedesII: "Networks and Connectivity Laboratory I",
+    LaboratoriodeCiberseguridad: "Cybersecurity Lab",
+    LaboratoriodeEstadisticaySimulacionMatematica:
+      "Statistics and Mathematical Simulation Laboratory",
+    LaboratoriodeSoftware: "Software Laboratory",
+    LaboratoriodeSimulacionEmpresarial: "Business Simulation Laboratory",
+    Actividades: "Activities",
+    Peticiones: "Requests",
+  };
+  const HomeWords = language == "Español" ? SpanishWords : EnglishWords;
+
   return (
     <section className="calendar-container">
       <header className="perfil_header-section">
@@ -26,16 +70,16 @@ export const SchedulePage = () => {
 
       <main className="main-content">
         <div className="weekdays">
-          <span className="weekday">Lun.</span>
-          <span className="weekday">Mar.</span>
-          <span className="weekday">Mier.</span>
-          <span className="weekday">Jue.</span>
-          <span className="weekday">Vie.</span>
-          <span className="weekday">Sab.</span>
-          <span className="weekday">Dom.</span>
+          <span className="weekday">{HomeWords.Lun}.</span>
+          <span className="weekday">{HomeWords.Mar}.</span>
+          <span className="weekday">{HomeWords.Mier}.</span>
+          <span className="weekday">{HomeWords.Jue}.</span>
+          <span className="weekday">{HomeWords.Vie}.</span>
+          <span className="weekday">{HomeWords.Sab}.</span>
+          <span className="weekday">{HomeWords.Dom}.</span>
         </div>
 
-        <h2 className="section-title">Actividades</h2>
+        <h2 className="section-title">{HomeWords.Actividades}</h2>
         <div className="separator100"></div>
 
         <article className="activity-card">
@@ -47,7 +91,7 @@ export const SchedulePage = () => {
             />
             <div className="activity-details">
               <h3 className="instructor-name">Ing. Gardyn Olivera Ruiz</h3>
-              <p className="course-name">Redes y Conectividad II</p>
+              <p className="course-name">{HomeWords.LaboratoriodeRedesII}</p>
               <p className="activity-description">
                 Desarrollo de la sesion 15, y toma de examen parcial 2
               </p>
@@ -66,7 +110,7 @@ export const SchedulePage = () => {
       </main>
 
       <section className="requests-section">
-        <h2 className="section-title">Peticiones</h2>
+        <h2 className="section-title">{HomeWords.Peticiones}</h2>
         <div className="separator100"></div>
 
         <article className="request-card">
@@ -80,7 +124,7 @@ export const SchedulePage = () => {
               <h3 className="instructor-name">
                 Ing. Christian Garcia Villegas
               </h3>
-              <p className="course-name">Ingenieria de Requisitos</p>
+              <p className="course-name">IngenieriadeRequisitos</p>
               <p className="activity-description">
                 Por motivo de las festividades, se solicita el ambiente para la
                 recuperación de la sesión 14

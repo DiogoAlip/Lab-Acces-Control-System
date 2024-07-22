@@ -23,6 +23,7 @@ export const PerfilPage = () => {
     CambiarIdioma: "Cambiar idioma",
     FechadeIntegracion: "Fecha de Integracion",
   };
+
   const EnglishWords = {
     AJUSTES: "SETTIGNS",
     NombresyApellidos: "Name(s) and LastName(s)",

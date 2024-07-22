@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import "./schedulesPage.css";
 import { LanguageContext } from "../context/LanguageContext";
+import { CalendaryBar } from "../components/CaledaryBar";
 
 export const SchedulePage = () => {
   const { language } = useContext(LanguageContext);
@@ -13,13 +14,6 @@ export const SchedulePage = () => {
     .toUpperCase();
 
   const SpanishWords = {
-    Lun: "Lun",
-    Mar: "Mar",
-    Mier: "Mier",
-    Jue: "Jue",
-    Vie: "Vie",
-    Sab: "Sab",
-    Dom: "Dom",
     Laboratorios: "Laboratories",
     LaboratoriodeRedesyConectividadI: "Networks and Connectivity Laboratory I",
     LaboratoriodeRedesII: "Networks and Connectivity Laboratory I",
@@ -32,13 +26,6 @@ export const SchedulePage = () => {
     Peticiones: "Peticiones",
   };
   const EnglishWords = {
-    Lun: "Mon",
-    Mar: "Tue",
-    Mier: "Wed",
-    Jue: "Thu",
-    Vie: "Fri",
-    Sab: "Sat",
-    Dom: "Sun",
     Laboratorios: "Laboratories",
     LaboratoriodeRedesyConectividadI: "Networks and Connectivity Laboratory I",
     LaboratoriodeRedesII: "Networks and Connectivity Laboratory I",
@@ -69,16 +56,7 @@ export const SchedulePage = () => {
       </header>
 
       <main className="main-content">
-        <div className="weekdays">
-          <span className="weekday">{HomeWords.Lun}.</span>
-          <span className="weekday">{HomeWords.Mar}.</span>
-          <span className="weekday">{HomeWords.Mier}.</span>
-          <span className="weekday">{HomeWords.Jue}.</span>
-          <span className="weekday">{HomeWords.Vie}.</span>
-          <span className="weekday">{HomeWords.Sab}.</span>
-          <span className="weekday">{HomeWords.Dom}.</span>
-        </div>
-
+        <CalendaryBar />
         <h2 className="section-title">{HomeWords.Actividades}</h2>
         <div className="separator100"></div>
 
@@ -134,16 +112,18 @@ export const SchedulePage = () => {
           <div className="request-time">
             <span className="time-slot">4 - 6 P.M.</span>
             <span className="request-location">Lab. Sis. Emp.</span>
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/319d4045cf123f69948f445827001c7d9b7c8c19e187fe895ef896f127ac2628?apiKey=d337f2d517f4408a99dd126ae7e4b446&"
-              alt="Reject request"
-              className="action-button reject-button"
-            />
-            <img
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/ddefb5760e13384f76a206222f4b6afb2bf3007a3f3bfd985c050e4ed4f97133?apiKey=d337f2d517f4408a99dd126ae7e4b446&"
-              alt="Accept request"
-              className="action-button accept-button"
-            />
+            <div>
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/319d4045cf123f69948f445827001c7d9b7c8c19e187fe895ef896f127ac2628?apiKey=d337f2d517f4408a99dd126ae7e4b446&"
+                alt="Reject request"
+                className="action-button reject-button"
+              />
+              <img
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/ddefb5760e13384f76a206222f4b6afb2bf3007a3f3bfd985c050e4ed4f97133?apiKey=d337f2d517f4408a99dd126ae7e4b446&"
+                alt="Accept request"
+                className="action-button accept-button"
+              />
+            </div>
           </div>
         </article>
       </section>

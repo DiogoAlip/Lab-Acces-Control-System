@@ -1,6 +1,8 @@
 export { default as calendar } from "./calendar-days-solid.svg";
 export { default as estadistics } from "./chart-simple-solid.svg";
 export { default as circlecheck } from "./circle-check-regular.svg";
+export { default as leftarrow } from "./chevron-left-solid.svg";
+export { default as rightarrow } from "./chevron-right-solid.svg";
 export { default as gear } from "./gear-solid.svg";
 export { default as house } from "./house-solid.svg";
 export { default as pensquare } from "./pen-to-square-solid.svg";

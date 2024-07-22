@@ -43,18 +43,33 @@
 }
 
 .weekdays {
-  width: 100%;
-  max-width: 400px;
-  align-self: center;
+  align-items: center;
   display: flex;
   gap: 18px;
-  font: 600 12px Roboto, sans-serif;
   position: sticky;
-  justify-content: space-between;
+  justify-content: center;
+}
+.weekday-container {
+  width: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .weekday {
   text-align: center;
+}
+
+.weekday-number {
+  border: 2px solid #000;
+  border-radius: 8px;
+  height: 40px;
+  width: 40px;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .section-title {
@@ -62,10 +77,8 @@
   font: 600 22px Roboto, sans-serif;
 }
 
-.divider {
-  background-color: #000;
-  margin-top: 14px;
-  height: 5px;
+.select {
+  background-color: #89d1e8;
 }
 
 .activity-card {
@@ -177,6 +190,8 @@
   background-color: #89d1e8;
   border: 2px solid #000;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 10px;
   gap: 18px;
   font: italic 700 15px Roboto, sans-serif;
@@ -184,8 +199,7 @@
 }
 
 .request-location {
-  align-self: start;
-  margin-top: 11px;
+  align-items: center;
 }
 
 .action-button {
@@ -193,9 +207,9 @@
   object-fit: auto;
   object-position: center;
   width: 30px;
-  border: 2px solid #000;
   border-radius: 50%;
   height: 30px;
+  margin-left: 16px;
 }
 
 .reject-button {

@@ -38,6 +38,8 @@ export const LoginPage = () => {
     } else if (passwd.length <= 8) {
       window.alert("La constraseña es muy corta");
       return;
+    } else if (name != "William Marchand" && passwd != "cibersecurity") {
+      return;
     }
     login(name, passwd);
     setLocation(`dashboard/`);

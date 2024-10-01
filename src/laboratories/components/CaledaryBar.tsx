@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { LanguageContext } from "../context/LanguageContext";
+import { allDaysByMonth } from "../hooks/getDate";
 import { rightarrow } from "../../assets";
 import { leftarrow } from "../../assets";
 
@@ -10,6 +11,10 @@ export const CalendaryBar = () => {
   const actualDate = new Date(actualTime);
   const [weekday, setWeekDay] = useState(actualDate.getDay() || 7);
   const [selectDay, setSelectDay] = useState(actualDate.getDate());
+  const daysOfTheMonth = allDaysByMonth(
+    actualDate.getMonth(),
+    actualDate.getFullYear()
+  );
 
   const dayPositionByWeekDay = [1, 2, 3, 4, 5, 6, 7];
 
@@ -27,7 +32,13 @@ export const CalendaryBar = () => {
         onClick={() => setSelectDay(selectDay - 7)}
       />
       {dayPositionByWeekDay.map((value, index) => {
-        const numberDay = selectDay + (dayPositionByWeekDay[index] - weekday);
+        const numberDay = daysOfTheMonth[
+          selectDay + (dayPositionByWeekDay[index] - weekday)
+        ].getDay()
+          ? daysOfTheMonth[
+              selectDay + (dayPositionByWeekDay[index] - weekday)
+            ].getDay()
+          : 0;
         return (
           <div className="weekday-container" key={value}>
             <span className="weekday">{HomeWords[index]}.</span>
@@ -38,6 +49,7 @@ export const CalendaryBar = () => {
               onClick={() => {
                 setSelectDay(numberDay);
                 setWeekDay(dayPositionByWeekDay[index]);
+                console.log(weekday);
               }}
             >
               {numberDay}

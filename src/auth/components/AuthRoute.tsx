@@ -23,7 +23,7 @@ export const AuthRoute: React.FC<ProtectedRouteProps> = ({
         isAuthenticated ? (
           <Component {...props} />
         ) : (
-          <Redirect to={`/${redirectTo}`} />
+          <Redirect to={`./${redirectTo}`} />
         )
       }
     />

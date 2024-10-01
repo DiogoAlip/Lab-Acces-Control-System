@@ -1,12 +1,9 @@
-export const getDataDate = () => {
-  const idioma = "es-ES";
-  const fecha = new Date();
-  const mes = fecha
-    .toLocaleString(idioma, {
-      month: "long",
-    })
-    .toUpperCase();
-  const semana = fecha.toLocaleString(idioma, { weekday: "long" });
-
-  return { mes, semana };
+export const allDaysByMonth = (month: number, year: number) => {
+  const date = new Date(year, month, 1);
+  const days = [];
+  while (date.getMonth() === month) {
+    days.push(new Date(date));
+    date.setDate(date.getDate() + 1);
+  }
+  return days;
 };

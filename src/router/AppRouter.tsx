@@ -18,7 +18,7 @@ export const AppRouter = () => {
             redirectTo="login"
             component={LogedUserPage}
             nest
-          ></AuthRoute>
+          />
           <Route path="register">
             <RegisterPage />
           </Route>

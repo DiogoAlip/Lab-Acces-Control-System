@@ -40,7 +40,7 @@ export const LoginPage = () => {
       return;
     } else if (name != "William Marchand" && passwd != "cibersecurity") {
       return;
-    }
+      }
     login(name, passwd);
     setLocation(`dashboard/`);
   };

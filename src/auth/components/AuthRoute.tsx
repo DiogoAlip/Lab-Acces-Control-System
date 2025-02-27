@@ -1,6 +1,5 @@
-import React, { ComponentType, useContext } from "react";
+import React, { ComponentType } from "react";
 import { Redirect, Route, RouteProps } from "wouter";
-import { AuthContext, AuthContextType } from "../context/";
 
 interface ProtectedRouteProps extends RouteProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,14 +12,14 @@ export const AuthRoute: React.FC<ProtectedRouteProps> = ({
   redirectTo,
   ...rest
 }) => {
-  const { isAuthenticated } = useContext<AuthContextType>(AuthContext);
+  /* usar UseSelec para obtener si esta validado o no */
 
   return (
     <Route
       {...rest}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       component={(props: any) =>
-        isAuthenticated ? (
+        "isAuthenticated" ? (
           <Component {...props} />
         ) : (
           <Redirect to={`./${redirectTo}`} />

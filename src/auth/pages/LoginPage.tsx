@@ -1,47 +1,18 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { user } from "../../assets";
 import { lock } from "../assets";
-import { useUserLogin } from "../hooks/useUserLoginReducer";
-import { AuthContext } from "../context";
 import { Link, useLocation } from "wouter";
+import { useForm } from "../hooks/useForm";
+
+const initialData = { name: "", password: "" };
 
 export const LoginPage = () => {
+  const { name, password, onChangeField } = useForm(initialData);
+
   const [RememberPassw, setRememberPassw] = useState(false);
-  const { UserLogin, onSetUserLogin } = useUserLogin({
-    name: "",
-    passwd: "",
-  });
   const [, setLocation] = useLocation();
-  const { login } = useContext(AuthContext);
 
-  const onClickUserLogin = ({
-    target: { value, name },
-  }: {
-    target: { value: string; name: string };
-  }) => {
-    onSetUserLogin({ ...UserLogin, [name]: value });
-  };
-
-  const onClickStartSession = ({
-    name,
-    passwd,
-  }: {
-    name: string;
-    passwd: string;
-  }) => {
-    if (name.length <= 8 && passwd.length <= 8) {
-      window.alert("Tanto nombre como contraseña son muy cortos");
-      return;
-    } else if (name.length <= 8) {
-      window.alert("El nombre es muy corto");
-      return;
-    } else if (passwd.length <= 8) {
-      window.alert("La constraseña es muy corta");
-      return;
-    } else if (name != "William Marchand" && passwd != "cibersecurity") {
-      return;
-      }
-    login(name, passwd);
+  const onClickStartSession = () => {
     setLocation(`dashboard/`);
   };
 
@@ -56,25 +27,15 @@ export const LoginPage = () => {
         />
       </header>
       <div className="login-modal">
-        <form
-          className="login"
-          action=""
-          onSubmit={(e) => {
-            e.preventDefault();
-            onClickStartSession({
-              name: UserLogin.name,
-              passwd: UserLogin.passwd,
-            });
-          }}
-        >
+        <form className="login" action="" onSubmit={() => {}}>
           <div className="name-container">
             <div className="little-image_container">
               <img src={user} alt="" />
             </div>
             <input
               type="text"
-              value={UserLogin.name}
-              onChange={onClickUserLogin}
+              value={name || ""}
+              onChange={onChangeField}
               placeholder="Nombre"
               name="name"
               required
@@ -86,10 +47,10 @@ export const LoginPage = () => {
             </div>
             <input
               type="password"
-              value={UserLogin.passwd}
+              value={password || ""}
               placeholder="Contraseña"
-              name="passwd"
-              onChange={onClickUserLogin}
+              name="password"
+              onChange={onChangeField}
               required
             />
           </div>
@@ -104,16 +65,7 @@ export const LoginPage = () => {
             </div>
             <Link to="/register">¿Olvido su contraseña?</Link>
           </div>
-          <button
-            onClick={() =>
-              onClickStartSession({
-                name: UserLogin.name,
-                passwd: UserLogin.passwd,
-              })
-            }
-          >
-            Iniciar Session
-          </button>
+          <button onClick={onClickStartSession}>Iniciar Session</button>
         </form>
       </div>
     </div>

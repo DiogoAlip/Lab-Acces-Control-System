@@ -12,7 +12,7 @@ export const AuthRoute: React.FC<ProtectedRouteProps> = ({
   redirectTo,
   ...rest
 }) => {
-  /* usar UseSelec para obtener si esta validado o no */
+  const {status} = useSelect()
 
   return (
     <Route

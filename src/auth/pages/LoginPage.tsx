@@ -5,14 +5,14 @@ import { Link, useLocation } from "wouter";
 import { useForm } from "../hooks/useForm";
 
 const initialData = { name: "", password: "" };
-
 export const LoginPage = () => {
   const { name, password, onChangeField } = useForm(initialData);
 
   const [RememberPassw, setRememberPassw] = useState(false);
   const [, setLocation] = useLocation();
 
-  const onClickStartSession = () => {
+  const onClickStartSession = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     setLocation(`dashboard/`);
   };
 
@@ -65,7 +65,9 @@ export const LoginPage = () => {
             </div>
             <Link to="/register">¿Olvido su contraseña?</Link>
           </div>
-          <button onClick={onClickStartSession}>Iniciar Session</button>
+          <button onClick={(e) => onClickStartSession(e)}>
+            Iniciar Session
+          </button>
         </form>
       </div>
     </div>

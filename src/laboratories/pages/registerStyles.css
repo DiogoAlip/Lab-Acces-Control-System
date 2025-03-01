@@ -69,6 +69,12 @@
   font: italic 500 15px Roboto, sans-serif;
 }
 
+.form {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .input-container {
   border-radius: 10px;
   border: 2px solid rgba(0, 0, 0, 1);

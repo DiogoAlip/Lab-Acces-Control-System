@@ -36,7 +36,7 @@ export const RegisterPage = () => {
 
       {validEmail.length === 0 ? true : <p>{validEmail}</p>}
 
-      <form action="" onSubmit={(e) => onSubmit(e)}>
+      <form action="" onSubmit={(e) => onSubmit(e)} className="form">
         <div className="input-container">
           <img
             loading="lazy"

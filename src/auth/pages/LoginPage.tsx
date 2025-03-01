@@ -4,15 +4,29 @@ import { lock } from "../assets";
 import { Link, useLocation } from "wouter";
 import { useForm } from "../hooks/useForm";
 
-const initialData = { name: "", password: "" };
+const initialForm = { name: "", password: "" };
+const initialFormValidator = {
+  name: [(nameValue: string) => nameValue.length > 3, "el nombre es muy corto"],
+  password: [
+    (passwordValue: string) => passwordValue.length > 3,
+    "la contraseña es muy corta",
+  ],
+};
+
 export const LoginPage = () => {
-  const { name, password, onChangeField } = useForm(initialData);
+  const { name, password, onChangeField, nameValid, passwordValid } = useForm(
+    initialForm,
+    initialFormValidator
+  );
 
   const [RememberPassw, setRememberPassw] = useState(false);
+  const [attempedSubmit, setAttempedSubmit] = useState(false);
   const [, setLocation] = useLocation();
 
   const onClickStartSession = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    setAttempedSubmit(true);
+    if (nameValid && passwordValid) return;
     setLocation(`dashboard/`);
   };
 
@@ -28,6 +42,7 @@ export const LoginPage = () => {
       </header>
       <div className="login-modal">
         <form className="login" action="" onSubmit={() => {}}>
+          {nameValid && attempedSubmit ? <label>{nameValid}</label> : false}
           <div className="name-container">
             <div className="little-image_container">
               <img src={user} alt="" />
@@ -41,6 +56,11 @@ export const LoginPage = () => {
               required
             />
           </div>
+          {passwordValid && attempedSubmit ? (
+            <label>{passwordValid}</label>
+          ) : (
+            false
+          )}
           <div className="password-container">
             <div className="little-image_container">
               <img src={lock} alt="" />

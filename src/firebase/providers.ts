@@ -9,7 +9,7 @@ import { FirebaseAuth } from "./config";
 
 const googleProvider = new GoogleAuthProvider();
 
-export const signInWithGoogle = async () => {
+/* export const signInWithGoogle = async () => {
   try {
     const result = await signInWithPopup(FirebaseAuth, googleProvider);
     //const credenciales = GoogleAuthProvider.credentialFromResult(result);
@@ -29,7 +29,7 @@ export const signInWithGoogle = async () => {
       errorMessage: error.message,
     };
   }
-};
+}; */
 
 export const registerUserWithEmailPassword = async ({
   email,
@@ -52,7 +52,6 @@ export const registerUserWithEmailPassword = async ({
 
     return { ok: true, uid, photoURL, email, displayName };
   } catch (error: { code: string; message: string } | null) {
-    console.log(error);
     return { ok: false, errorMessage: error.message };
   }
 };
@@ -75,8 +74,4 @@ export const loggingWithEmailPassword = async ({
   } catch (error: { code: string; message: string } | null) {
     return { ok: false, errorMessage: error.message };
   }
-};
-
-export const logoutFirebase = async () => {
-  return await FirebaseAuth.signOut();
 };

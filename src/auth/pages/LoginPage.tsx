@@ -3,6 +3,8 @@ import { user } from "../../assets";
 import { lock } from "../assets";
 import { Link, useLocation } from "wouter";
 import { useForm } from "../hooks/useForm";
+import { startLogginUser } from "../../store/thunks";
+import { useDispatch, useSelector } from "react-redux";
 
 const initialForm = { name: "", password: "" };
 const initialFormValidator = {
@@ -14,19 +16,25 @@ const initialFormValidator = {
 };
 
 export const LoginPage = () => {
-  const { name, password, onChangeField, nameValid, passwordValid } = useForm(
-    initialForm,
-    initialFormValidator
-  );
+  const { name, password, onChangeField, resetForm, nameValid, passwordValid } =
+    useForm(initialForm, initialFormValidator);
 
   const [RememberPassw, setRememberPassw] = useState(false);
   const [attempedSubmit, setAttempedSubmit] = useState(false);
+  const dispatch = useDispatch();
+  const { errorMessage } = useSelector(
+    (state: { auth: { errorMessage: string } }) => state.auth
+  );
   const [, setLocation] = useLocation();
 
   const onClickStartSession = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setAttempedSubmit(true);
-    if (nameValid && passwordValid) return;
+    if (nameValid && passwordValid) {
+      resetForm();
+      return;
+    }
+    dispatch(startLogginUser(name, password));
     setLocation(`dashboard/`);
   };
 
@@ -85,6 +93,7 @@ export const LoginPage = () => {
             </div>
             <Link to="/register">¿Olvido su contraseña?</Link>
           </div>
+          {errorMessage ? <p id="error-login-message">{errorMessage}</p> : true}
           <button onClick={(e) => onClickStartSession(e)}>
             Iniciar Session
           </button>

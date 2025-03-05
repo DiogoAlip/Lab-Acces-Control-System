@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { user } from "../../assets";
 import { lock } from "../assets";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { useForm } from "../hooks/useForm";
 import { startLogginUser } from "../../store/thunks";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,7 +25,6 @@ export const LoginPage = () => {
   const { errorMessage } = useSelector(
     (state: { auth: { errorMessage: string } }) => state.auth
   );
-  const [, setLocation] = useLocation();
 
   const onClickStartSession = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -35,7 +34,6 @@ export const LoginPage = () => {
       return;
     }
     dispatch(startLogginUser(name, password));
-    setLocation(`dashboard/`);
   };
 
   return (

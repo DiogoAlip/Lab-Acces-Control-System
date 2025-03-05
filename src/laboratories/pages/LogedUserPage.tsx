@@ -1,11 +1,11 @@
-import { Switch } from "wouter";
+import { Router } from "wouter";
 import { NavBar } from "../components/NavBar";
 import { LabRoutes } from "../routes/LabRoutes";
 export const LogedUserPage = () => {
   return (
-    <Switch>
+    <Router>
       <NavBar />
       <LabRoutes />
-    </Switch>
+    </Router>
   );
 };

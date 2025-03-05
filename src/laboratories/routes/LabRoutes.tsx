@@ -1,4 +1,4 @@
-import { Redirect, Route, Switch } from "wouter";
+import { Redirect, Route, Router } from "wouter";
 import {
   HomePage,
   EstadisticPage,
@@ -8,7 +8,7 @@ import {
 } from "../pages";
 export const LabRoutes = () => {
   return (
-    <Switch>
+    <Router>
       <Route path="/home">
         <HomePage />
       </Route>
@@ -24,9 +24,9 @@ export const LabRoutes = () => {
       <Route path="/schedule">
         <SchedulePage />
       </Route>
-      <Route>
+      <Route path="/*">
         <Redirect to="/home" />
       </Route>
-    </Switch>
+    </Router>
   );
 };

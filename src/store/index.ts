@@ -1,3 +1,3 @@
-export { login, logout, checkingCredencials, authSlice } from "./authSlice";
-export { store } from "./store";
-export { startLogginUser } from "./thunks";
+export * from "./authSlice";
+export * from "./store";
+export * from "./thunks";

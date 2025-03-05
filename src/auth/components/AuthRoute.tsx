@@ -1,5 +1,4 @@
 import React, { ComponentType } from "react";
-import { useSelector } from "react-redux";
 import { Redirect, Route, RouteProps } from "wouter";
 
 interface ProtectedRouteProps extends RouteProps {
@@ -13,10 +12,6 @@ export const AuthRoute: React.FC<ProtectedRouteProps> = ({
   redirectTo,
   ...rest
 }) => {
-  const { status } = useSelector(
-    (state: { auth: { status: string } }) => state.auth
-  );
-
   return (
     <Route
       {...rest}

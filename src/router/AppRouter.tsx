@@ -10,7 +10,8 @@ export const AppRouter = () => {
   const [, setLocation] = useLocation();
 
   useEffect(() => {
-    if (state === "authenticated") setLocation("dashboard");
+    if (state === "authenticated") setLocation("../dashboard");
+    else setLocation("../login");
   }, [state]);
 
   return (

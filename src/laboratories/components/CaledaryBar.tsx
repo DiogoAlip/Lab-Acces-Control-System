@@ -1,19 +1,21 @@
-import { useContext, useState } from "react";
-import { LanguageContext } from "../context/LanguageContext";
-import { allDaysByMonth } from "../hooks/getDate";
-import { rightarrow } from "../../assets";
-import { leftarrow } from "../../assets";
+import { useWeek } from "../hooks/useWeek";
+import { rightarrow, leftarrow } from "../../assets";
+import { SetStateAction, Dispatch } from "react";
 
-export const CalendaryBar = () => {
-  const { language } = useContext(LanguageContext);
-
-  const actualTime = Date.now();
-  const actualDate = new Date(actualTime);
-  const [weekday, setWeekDay] = useState(actualDate.getDay() || 7);
-  const [selectDay, setSelectDay] = useState(actualDate.getDate());
-  const daysOfTheMonth = allDaysByMonth(
-    actualDate.getMonth(),
-    actualDate.getFullYear()
+export const CalendaryBar = ({
+  language,
+  forOpenModal,
+  date,
+  forChangeMonth,
+}: {
+  language: string;
+  forOpenModal: Dispatch<SetStateAction<boolean>>;
+  date: Date;
+  forChangeMonth: (value: number) => void;
+}) => {
+  const { week, weekday, keepMonth, nextWeek, prevWeek, changeDay } = useWeek(
+    date.getMonth(),
+    date.getFullYear()
   );
 
   const dayPositionByWeekDay = [1, 2, 3, 4, 5, 6, 7];
@@ -29,16 +31,16 @@ export const CalendaryBar = () => {
         src={leftarrow}
         className="little-image"
         alt=""
-        onClick={() => setSelectDay(selectDay - 7)}
+        onClick={() => {
+          prevWeek();
+          if (week[0] - 7 < 1) {
+            forChangeMonth(keepMonth - 1);
+          } else {
+            forChangeMonth(keepMonth);
+          }
+        }}
       />
-      {dayPositionByWeekDay.map((value, index) => {
-        const numberDay = daysOfTheMonth[
-          selectDay + (dayPositionByWeekDay[index] - weekday)
-        ].getDay()
-          ? daysOfTheMonth[
-              selectDay + (dayPositionByWeekDay[index] - weekday)
-            ].getDay()
-          : 0;
+      {week.map((value, index) => {
         return (
           <div className="weekday-container" key={value}>
             <span className="weekday">{HomeWords[index]}.</span>
@@ -47,12 +49,11 @@ export const CalendaryBar = () => {
                 weekday === dayPositionByWeekDay[index] ? "select" : ""
               }`}
               onClick={() => {
-                setSelectDay(numberDay);
-                setWeekDay(dayPositionByWeekDay[index]);
-                console.log(weekday);
+                changeDay(value, dayPositionByWeekDay[index]);
+                forChangeMonth(keepMonth);
               }}
             >
-              {numberDay}
+              {week[index]}
             </div>
           </div>
         );
@@ -61,7 +62,14 @@ export const CalendaryBar = () => {
         src={rightarrow}
         className="little-image"
         alt=""
-        onClick={() => setSelectDay(selectDay + 7)}
+        onClick={() => {
+          nextWeek();
+          if (week[week.length - 1] + 7 > 31) {
+            forChangeMonth(keepMonth + 1);
+          } else {
+            forChangeMonth(keepMonth);
+          }
+        }}
       />
     </div>
   );

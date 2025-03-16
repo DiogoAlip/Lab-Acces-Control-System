@@ -28,9 +28,9 @@ export const AppRouter = () => {
         </Route>
         <Route path="/*">
           {state === "authenticated" ? (
-            <Redirect to="./dashboard" />
+            <Redirect to="../dashboard" />
           ) : (
-            <Redirect to="./login" />
+            <Redirect to="../login" />
           )}
         </Route>
       </Switch>

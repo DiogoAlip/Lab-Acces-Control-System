@@ -70,6 +70,10 @@ nav {
   height: 21px;
 }
 
+.weekdays .little-image {
+  cursor: pointer;
+}
+
 .nav-item {
   min-width: 42px;
   min-height: 42px;

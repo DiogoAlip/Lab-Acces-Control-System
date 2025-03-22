@@ -1,34 +1,19 @@
 import { useContext, useState } from "react";
 import "./schedulesPage.css";
 import { LanguageContext } from "../context/LanguageContext";
-import { CalendaryBar } from "../components/CaledaryBar";
-import { NotificationModal } from "../components/NotificationModal";
+import { CalendaryBar, NotificationModal, ScheduleModal } from "../components/";
+import { getMonthName } from "../helpers/getMonthName";
 
 export const SchedulePage = () => {
   const { language } = useContext(LanguageContext);
   const [calendaryOpen, setCalendaryOpen] = useState(false);
   const [reservationsOpen, setReservationsOpen] = useState(false);
-  const languageTag = language == "Español" ? "es-ES" : "en-EN";
   const date = new Date(Date.now());
-  const [month, setMonth] = useState(
-    date
-      .toLocaleString(languageTag, {
-        month: "long",
-      })
-      .toUpperCase()
-  );
+  const [month, setMonth] = useState(getMonthName(language, date.getMonth()));
 
-  const setMonthTitleByNumber = (
-    monthByNumber: number,
-    languageTag: string
-  ) => {
-    const date = new Date(Date.now());
+  const setMonthTitleByNumber = (monthByNumber: number) => {
     date.setMonth(monthByNumber);
-    const monthText = date
-      .toLocaleString(languageTag, {
-        month: "long",
-      })
-      .toUpperCase();
+    const monthText = getMonthName(language, monthByNumber);
     setMonth(monthText);
   };
 
@@ -61,13 +46,17 @@ export const SchedulePage = () => {
   return (
     <>
       {calendaryOpen && (
-        <NotificationModal>
-          <h1>Calendary Modal</h1>
-        </NotificationModal>
+        <ScheduleModal
+          date={date}
+          language={language}
+          exitModal={() => setCalendaryOpen(!calendaryOpen)}
+        />
       )}
       {reservationsOpen && (
         <NotificationModal>
-          <h1>Reservation Modal</h1>
+          <h1 onClick={() => setReservationsOpen(!reservationsOpen)}>
+            Reservation Modal
+          </h1>
         </NotificationModal>
       )}
       <section className="calendar-container">
@@ -75,7 +64,12 @@ export const SchedulePage = () => {
           <section className="settings-section">
             <div className="settings-actions">
               <div className="settings-image"></div>
-              <div className="settings-text">{month}</div>
+              <div
+                className="settings-text"
+                onClick={() => setCalendaryOpen(!calendaryOpen)}
+              >
+                {month}
+              </div>
               <img
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/17eb6121a79df0c3d3a3d78bd7588189b400c6863dc82d7da7a57f655f021ff8?apiKey=d337f2d517f4408a99dd126ae7e4b446&"
                 alt=""
@@ -88,11 +82,8 @@ export const SchedulePage = () => {
         <main className="main-content">
           <CalendaryBar
             language={language}
-            forOpenModal={setCalendaryOpen}
             date={date}
-            forChangeMonth={(monthNumber) =>
-              setMonthTitleByNumber(monthNumber, languageTag)
-            }
+            forChangeMonth={(monthNumber) => setMonthTitleByNumber(monthNumber)}
           />
           <h2 className="section-title">{HomeWords.Actividades}</h2>
           <div className="separator100"></div>

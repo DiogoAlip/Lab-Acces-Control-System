@@ -251,3 +251,23 @@
   width: 134px;
   height: 5px;
 }
+
+.weekdays-schedule {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-rows: 6;
+  grid-template-columns: 7;
+  gap: 6px;
+}
+
+.button-large {
+  margin-top: 10px;
+  width: 180px;
+  border-color: #000;
+}
+
+.fake-weekday-number {
+  height: 44px;
+  width: 44px;
+}

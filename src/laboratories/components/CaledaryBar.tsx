@@ -1,15 +1,13 @@
 import { useWeek } from "../hooks/useWeek";
 import { rightarrow, leftarrow } from "../../assets";
-import { SetStateAction, Dispatch } from "react";
+import { getWeekDays } from "../helpers/getWeekDays";
 
 export const CalendaryBar = ({
   language,
-  forOpenModal,
   date,
   forChangeMonth,
 }: {
   language: string;
-  forOpenModal: Dispatch<SetStateAction<boolean>>;
   date: Date;
   forChangeMonth: (value: number) => void;
 }) => {
@@ -19,11 +17,7 @@ export const CalendaryBar = ({
   );
 
   const dayPositionByWeekDay = [1, 2, 3, 4, 5, 6, 7];
-
-  const SpanishWords = ["Lun", "Mar", "Mier", "Jue", "Vie", "Sab", "Dom"];
-
-  const EnglishWords = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  const HomeWords = language == "Español" ? SpanishWords : EnglishWords;
+  const HomeWords = getWeekDays(language);
 
   return (
     <div className="weekdays">

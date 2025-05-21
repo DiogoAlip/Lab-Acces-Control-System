@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getWeek } from "../helpers";
 
 export const useWeek = (month: number, year: number) => {
   const [keepMonth, setKeepMonth] = useState(month);
@@ -8,27 +9,16 @@ export const useWeek = (month: number, year: number) => {
   const [actualDate, setActualDate] = useState(new Date(actualTime));
   const [weekday, setWeekDay] = useState(actualDate.getDay() || 7);
   const [selectDay, setSelectDay] = useState(actualDate.getDate());
-
-  const getWeek = (year: number, month: number, day: number) => {
-    const firstOfMonth = new Date(year, month, day);
-    let dayOfWeek = firstOfMonth.getDay();
-    if (dayOfWeek === 0) dayOfWeek = 7;
-    const startOfWeek = new Date(firstOfMonth);
-    startOfWeek.setDate(firstOfMonth.getDate() - (dayOfWeek - 1));
-    const week: Date[] = [];
-    for (let i = 0; i < 7; i++) {
-      const day = new Date(startOfWeek);
-      day.setDate(startOfWeek.getDate() + i);
-      week.push(day);
-    }
-    return week;
-  };
-
   const [week, setWeek] = useState(getWeek(keepYear, keepMonth, selectDay));
 
-  const changeDay = (newDay: number, newDayWeek: number) => {
-    setSelectDay(newDay);
-    setWeekDay(newDayWeek);
+  useEffect(() => {
+    const selectDate = week.find((date) => date.getDate() === selectDay);
+    setKeepMonth(selectDate?.getMonth());
+  }, [selectDay]);
+
+  const changeDay = (newDay: Date) => {
+    setSelectDay(newDay.getDate());
+    setWeekDay(newDay.getDay());
   };
 
   const nextWeek = () => {

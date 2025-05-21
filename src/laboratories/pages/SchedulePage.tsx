@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import "./schedulesPage.css";
 import { LanguageContext } from "../context/LanguageContext";
 import { CalendaryBar, NotificationModal, ScheduleModal } from "../components/";
-import { getMonthName } from "../helpers/getMonthName";
+import { getMonthName } from "../helpers";
 
 export const SchedulePage = () => {
   const { language } = useContext(LanguageContext);

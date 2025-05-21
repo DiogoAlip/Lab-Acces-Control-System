@@ -1,8 +1,10 @@
 import { NotificationModal } from "./NotificationModal";
 import { rightarrow, leftarrow } from "../../assets";
-import { getWeekDays } from "../helpers/getWeekDays";
-import { getMonthDaysPerYear } from "../hooks/getMonthDaysPerYear";
-import { getMonthName } from "../helpers/getMonthName";
+import {
+  getWeekDaysNames,
+  getMonthDaysPerYear,
+  getMonthName,
+} from "../helpers";
 
 export const ScheduleModal = ({
   date,
@@ -13,7 +15,7 @@ export const ScheduleModal = ({
   language: string;
   exitModal: () => void;
 }) => {
-  const weekDays = getWeekDays(language);
+  const weekDays = getWeekDaysNames(language);
   const daysPerMonth = getMonthDaysPerYear(date.getFullYear());
   const monthName = getMonthName(language, date.getMonth());
   const today = date.getDate();

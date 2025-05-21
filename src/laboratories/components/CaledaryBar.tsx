@@ -1,7 +1,7 @@
+import { useEffect } from "react";
 import { useWeek } from "../hooks/useWeek";
 import { rightarrow, leftarrow } from "../../assets";
-import { getWeekDays } from "../helpers/getWeekDays";
-import { useEffect } from "react";
+import { getWeekDaysNames } from "../helpers";
 
 export const CalendaryBar = ({
   language,
@@ -21,7 +21,7 @@ export const CalendaryBar = ({
     forChangeMonth(keepMonth);
   }, [keepMonth]);
 
-  const HomeWords = getWeekDays(language);
+  const HomeWords = getWeekDaysNames(language);
 
   return (
     <div className="weekdays">
@@ -34,7 +34,7 @@ export const CalendaryBar = ({
               className={`weekday-number ${
                 weekday === value.getDay() ? "select" : ""
               }`}
-              onClick={() => changeDay(value.getDate(), value.getDay())}
+              onClick={() => changeDay(value)}
             >
               {week[index].getDate()}
             </div>

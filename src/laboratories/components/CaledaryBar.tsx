@@ -1,6 +1,7 @@
 import { useWeek } from "../hooks/useWeek";
 import { rightarrow, leftarrow } from "../../assets";
 import { getWeekDays } from "../helpers/getWeekDays";
+import { useEffect } from "react";
 
 export const CalendaryBar = ({
   language,
@@ -13,41 +14,29 @@ export const CalendaryBar = ({
 }) => {
   const { week, weekday, keepMonth, nextWeek, prevWeek, changeDay } = useWeek(
     date.getMonth(),
-    date.getFullYear()
+    date.getFullYear(),
   );
 
-  const dayPositionByWeekDay = [1, 2, 3, 4, 5, 6, 7];
+  useEffect(() => {
+    forChangeMonth(keepMonth);
+  }, [keepMonth]);
+
   const HomeWords = getWeekDays(language);
 
   return (
     <div className="weekdays">
-      <img
-        src={leftarrow}
-        className="little-image"
-        alt=""
-        onClick={() => {
-          prevWeek();
-          if (week[0] - 7 < 1) {
-            forChangeMonth(keepMonth - 1);
-          } else {
-            forChangeMonth(keepMonth);
-          }
-        }}
-      />
+      <img src={leftarrow} className="little-image" alt="" onClick={prevWeek} />
       {week.map((value, index) => {
         return (
-          <div className="weekday-container" key={value}>
+          <div className="weekday-container" key={value.getDate()}>
             <span className="weekday">{HomeWords[index]}.</span>
             <div
               className={`weekday-number ${
-                weekday === dayPositionByWeekDay[index] ? "select" : ""
+                weekday === value.getDay() ? "select" : ""
               }`}
-              onClick={() => {
-                changeDay(value, dayPositionByWeekDay[index]);
-                forChangeMonth(keepMonth);
-              }}
+              onClick={() => changeDay(value.getDate(), value.getDay())}
             >
-              {week[index]}
+              {week[index].getDate()}
             </div>
           </div>
         );
@@ -56,14 +45,7 @@ export const CalendaryBar = ({
         src={rightarrow}
         className="little-image"
         alt=""
-        onClick={() => {
-          nextWeek();
-          if (week[week.length - 1] + 7 > 31) {
-            forChangeMonth(keepMonth + 1);
-          } else {
-            forChangeMonth(keepMonth);
-          }
-        }}
+        onClick={nextWeek}
       />
     </div>
   );

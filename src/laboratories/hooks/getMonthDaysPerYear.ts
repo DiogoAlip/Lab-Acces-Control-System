@@ -1,18 +1,20 @@
 export const getMonthDaysPerYear = (year: number) => {
-  let month = 0;
-  let yearSchedule = {} as Record<number, Array<number>>;
-  const date = new Date(year, month, 1);
-  while (date.getFullYear() === year) {
-    const days = new Array<Date>();
-    while (date.getMonth() === month) {
-      days.push(new Date(date));
-      date.setDate(date.getDate() + 1);
+  const result: { [key: number]: Date[] } = {};
+
+  for (let month = 0; month < 12; month++) {
+    const days: Date[] = [];
+    let day = 1;
+
+    let currentDate = new Date(year, month, day);
+
+    while (currentDate.getMonth() === month) {
+      days.push(new Date(currentDate));
+      day++;
+      currentDate = new Date(year, month, day);
     }
-    yearSchedule = {
-      ...yearSchedule,
-      [`${month}`]: days.map((date) => date.getDate()),
-    };
-    date.setMonth(++month);
+
+    result[month] = days;
   }
-  return yearSchedule;
+
+  return result;
 };

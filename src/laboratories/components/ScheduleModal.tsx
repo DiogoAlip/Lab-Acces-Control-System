@@ -58,14 +58,14 @@ export const ScheduleModal = ({
               {fakeDay}
             </div>
           ))}
-          {daysPerMonth[date.getMonth()].map((monthDays) => (
+          {daysPerMonth[date.getMonth()].map((monthDays: Date) => (
             <div
               className={`weekday-number ${
-                today === monthDays ? "select" : ""
+                today === monthDays.getDate() ? "select" : ""
               }`}
-              key={monthDays}
+              key={monthDays.getDate()}
             >
-              {monthDays}
+              {monthDays.getDate()}
             </div>
           ))}
         </div>

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { getMonthDaysPerYear } from "./getMonthDaysPerYear";
 
 export const useWeek = (month: number, year: number) => {
   const [keepMonth, setKeepMonth] = useState(month);
@@ -9,25 +8,23 @@ export const useWeek = (month: number, year: number) => {
   const [actualDate, setActualDate] = useState(new Date(actualTime));
   const [weekday, setWeekDay] = useState(actualDate.getDay() || 7);
   const [selectDay, setSelectDay] = useState(actualDate.getDate());
-  const [daysOfYear, setDaysOfYear] = useState(getMonthDaysPerYear(keepYear));
 
-  const dayPositionByWeekDay = [1, 2, 3, 4, 5, 6, 7];
+  const getWeek = (year: number, month: number, day: number) => {
+    const firstOfMonth = new Date(year, month, day);
+    let dayOfWeek = firstOfMonth.getDay();
+    if (dayOfWeek === 0) dayOfWeek = 7;
+    const startOfWeek = new Date(firstOfMonth);
+    startOfWeek.setDate(firstOfMonth.getDate() - (dayOfWeek - 1));
+    const week: Date[] = [];
+    for (let i = 0; i < 7; i++) {
+      const day = new Date(startOfWeek);
+      day.setDate(startOfWeek.getDate() + i);
+      week.push(day);
+    }
+    return week;
+  };
 
-  const getWeek = (newDay = selectDay, newMonth = keepMonth) =>
-    dayPositionByWeekDay.map((_, index) => {
-      const month = daysOfYear[newMonth];
-      const weekForReturn = month[newDay - weekday + index];
-      if (!weekForReturn && index + 1 < weekday) {
-        const backMonth = daysOfYear[newMonth - 1];
-        return backMonth[backMonth.length + newDay - weekday + index];
-      } else if (!weekForReturn && index + 1 >= weekday) {
-        const nextMonth = daysOfYear[newMonth + 1];
-        return nextMonth[index - weekday];
-      }
-      return weekForReturn;
-    });
-
-  const [week, setWeek] = useState(getWeek());
+  const [week, setWeek] = useState(getWeek(keepYear, keepMonth, selectDay));
 
   const changeDay = (newDay: number, newDayWeek: number) => {
     setSelectDay(newDay);
@@ -37,9 +34,14 @@ export const useWeek = (month: number, year: number) => {
   const nextWeek = () => {
     actualDate.setDate(selectDay + 7);
     setActualDate(actualDate);
-    setKeepMonth(actualDate.getMonth());
     setSelectDay(actualDate.getDate());
-    setWeek(getWeek(actualDate.getDate(), actualDate.getMonth()));
+    setWeek(
+      getWeek(
+        actualDate.getFullYear(),
+        actualDate.getMonth(),
+        actualDate.getDate(),
+      ),
+    );
   };
 
   const prevWeek = () => {
@@ -54,13 +56,19 @@ export const useWeek = (month: number, year: number) => {
       setSelectDay(actualDate.getDate());
       setActualDate(actualDate);
     }
-    setKeepMonth(actualDate.getMonth());
-    setWeek(getWeek(actualDate.getDate(), actualDate.getMonth()));
+    setWeek(
+      getWeek(
+        actualDate.getFullYear(),
+        actualDate.getMonth(),
+        actualDate.getDate(),
+      ),
+    );
   };
 
   return {
     week,
     weekday,
+    selectDay,
     keepMonth,
     changeDay,
     nextWeek,

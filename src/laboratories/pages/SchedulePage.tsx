@@ -3,18 +3,23 @@ import "./schedulesPage.css";
 import { LanguageContext } from "../context/LanguageContext";
 import { CalendaryBar, NotificationModal, ScheduleModal } from "../components/";
 import { getMonthName } from "../helpers";
+import { useWeek } from "../hooks/useWeek";
+
+const date = new Date(Date.now());
 
 export const SchedulePage = () => {
+  const weekValues = useWeek(date.getMonth(), date.getFullYear());
   const { language } = useContext(LanguageContext);
   const [calendaryOpen, setCalendaryOpen] = useState(false);
   const [reservationsOpen, setReservationsOpen] = useState(false);
-  const date = new Date(Date.now());
-  const [month, setMonth] = useState(getMonthName(language, date.getMonth()));
+  const [monthName, setMonthName] = useState(
+    getMonthName(language, weekValues.keepMonth),
+  );
 
   const setMonthTitleByNumber = (monthByNumber: number) => {
     date.setMonth(monthByNumber);
     const monthText = getMonthName(language, monthByNumber);
-    setMonth(monthText);
+    setMonthName(monthText);
   };
 
   const SpanishWords = {
@@ -50,6 +55,8 @@ export const SchedulePage = () => {
           date={date}
           language={language}
           exitModal={() => setCalendaryOpen(!calendaryOpen)}
+          forChangeMonth={setMonthTitleByNumber}
+          month={monthName}
         />
       )}
       {reservationsOpen && (
@@ -65,10 +72,10 @@ export const SchedulePage = () => {
             <div className="settings-actions">
               <div className="settings-image"></div>
               <div
-                className="settings-text"
+                className="settings-text pointered"
                 onClick={() => setCalendaryOpen(!calendaryOpen)}
               >
-                {month}
+                {monthName}
               </div>
               <img
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/17eb6121a79df0c3d3a3d78bd7588189b400c6863dc82d7da7a57f655f021ff8?apiKey=d337f2d517f4408a99dd126ae7e4b446&"
@@ -82,8 +89,9 @@ export const SchedulePage = () => {
         <main className="main-content">
           <CalendaryBar
             language={language}
-            date={date}
-            forChangeMonth={(monthNumber) => setMonthTitleByNumber(monthNumber)}
+            //date={date}
+            forChangeMonth={setMonthTitleByNumber}
+            {...weekValues}
           />
           <h2 className="section-title">{HomeWords.Actividades}</h2>
           <div className="separator100"></div>

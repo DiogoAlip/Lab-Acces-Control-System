@@ -71,6 +71,14 @@
     cursor: pointer;
 }
 
+.pointered {
+    cursor: pointer;
+}
+
+.pointered:hover {
+    text-decoration: underline;
+}
+
 .section-title {
     margin-top: 69px;
     font:

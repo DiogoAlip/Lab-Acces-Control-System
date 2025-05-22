@@ -13,7 +13,10 @@ export const useWeek = (month: number, year: number) => {
 
   useEffect(() => {
     const selectDate = week.find((date) => date.getDate() === selectDay);
-    setKeepMonth(selectDate?.getMonth());
+    const month = selectDate?.getMonth() ?? actualDate.getMonth();
+    const year = selectDate?.getFullYear() ?? actualDate.getFullYear();
+    setKeepMonth(month);
+    setKeepYear(year);
   }, [selectDay]);
 
   const changeDay = (newDay: Date) => {

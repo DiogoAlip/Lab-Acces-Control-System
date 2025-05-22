@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NotificationModal } from "./NotificationModal";
 import { rightarrow, leftarrow } from "../../assets";
 import {
@@ -6,28 +7,45 @@ import {
   getMonthName,
 } from "../helpers";
 
+const firstDayMonthPosition = (month?: number) => {
+  const date = new Date(Date.now());
+  if (month) date.setMonth(month);
+  date.setDate(1);
+  return date.getDay() - 1 && 5;
+};
+
 export const ScheduleModal = ({
   date,
   language,
   exitModal,
+  forChangeMonth,
+  month,
 }: {
   date: Date;
   language: string;
   exitModal: () => void;
+  forChangeMonth: (number: number) => void;
+  month: string;
 }) => {
-  const weekDays = getWeekDaysNames(language);
-  const daysPerMonth = getMonthDaysPerYear(date.getFullYear());
-  const monthName = getMonthName(language, date.getMonth());
   const today = date.getDate();
+  const [voidDays, setVoidDays] = useState(
+    Array(firstDayMonthPosition()).fill(undefined),
+  );
+  const [daysPerMonth, setDaysPerMonth] = useState(
+    getMonthDaysPerYear(date.getFullYear()),
+  );
+  const weekDays = getWeekDaysNames(language);
+  const [monthName, setMonthName] = useState(
+    getMonthName(language, date.getMonth()),
+  );
 
-  const firstDayMonthPosition = (month = date.getMonth()) => {
-    const date = new Date(Date.now());
-    if (month) date.setMonth(month);
-    date.setDate(1);
-    return date.getDay() - 1 && 5;
+  const backMonth = () => {
+    //setVoidDays(Array(firstDayMonthPosition(date.getMonth())).fill(undefined));
   };
 
-  const voidDays = Array(firstDayMonthPosition()).fill(undefined);
+  const nextMonth = () => {
+    //setVoidDays(Array(firstDayMonthPosition(date.getMonth())).fill(undefined));
+  };
 
   return (
     <>
@@ -37,14 +55,16 @@ export const ScheduleModal = ({
             src={leftarrow}
             className="little-image"
             alt=""
-            onClick={() => {}}
+            onClick={backMonth}
           />
-          <h1 onClick={exitModal}>{monthName}</h1>
+          <h1 className="pointered" onClick={exitModal}>
+            {month}
+          </h1>
           <img
             src={rightarrow}
             className="little-image"
             alt=""
-            onClick={() => {}}
+            onClick={nextMonth}
           />
         </div>
         <div className="weekdays">

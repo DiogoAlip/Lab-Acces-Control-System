@@ -1,7 +1,6 @@
 export const getWeek = (year: number, month: number, day: number) => {
   const firstOfMonth = new Date(year, month, day);
-  let dayOfWeek = firstOfMonth.getDay();
-  if (dayOfWeek === 0) dayOfWeek = 7;
+  const dayOfWeek = firstOfMonth.getDay() || 7;
   const startOfWeek = new Date(firstOfMonth);
   startOfWeek.setDate(firstOfMonth.getDate() - (dayOfWeek - 1));
   const week: Date[] = [];

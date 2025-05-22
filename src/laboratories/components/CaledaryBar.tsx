@@ -1,22 +1,27 @@
 import { useEffect } from "react";
-import { useWeek } from "../hooks/useWeek";
 import { rightarrow, leftarrow } from "../../assets";
 import { getWeekDaysNames } from "../helpers";
 
 export const CalendaryBar = ({
   language,
-  date,
   forChangeMonth,
+  week,
+  weekday,
+  keepMonth,
+  nextWeek,
+  prevWeek,
+  changeDay,
 }: {
   language: string;
-  date: Date;
   forChangeMonth: (value: number) => void;
+  week: Date[];
+  weekday: number;
+  selectDay: number;
+  keepMonth: number;
+  changeDay: (newDay: Date) => void;
+  nextWeek: () => void;
+  prevWeek: () => void;
 }) => {
-  const { week, weekday, keepMonth, nextWeek, prevWeek, changeDay } = useWeek(
-    date.getMonth(),
-    date.getFullYear(),
-  );
-
   useEffect(() => {
     forChangeMonth(keepMonth);
   }, [keepMonth]);

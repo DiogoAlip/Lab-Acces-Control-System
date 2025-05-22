@@ -1,50 +1,63 @@
 import { useState } from "react";
 import { NotificationModal } from "./NotificationModal";
 import { rightarrow, leftarrow } from "../../assets";
-import {
-  getWeekDaysNames,
-  getMonthDaysPerYear,
-  getMonthName,
-} from "../helpers";
+import { getWeekDaysNames, getMonthDaysPerYear } from "../helpers";
 
 const firstDayMonthPosition = (month?: number) => {
   const date = new Date(Date.now());
   if (month) date.setMonth(month);
   date.setDate(1);
-  return date.getDay() - 1 && 5;
+  const weekDay = date.getDay() || 7;
+  return Array(weekDay - 1).fill(undefined);
 };
 
 export const ScheduleModal = ({
-  date,
   language,
   exitModal,
   forChangeMonth,
   month,
+  actualDate,
+  keepMonth,
+  week,
+  changeDay,
 }: {
-  date: Date;
   language: string;
   exitModal: () => void;
   forChangeMonth: (number: number) => void;
   month: string;
+  actualDate: Date;
+  keepMonth: number;
+  week: Date[];
+  changeDay: (newDate: Date) => void;
 }) => {
-  const today = date.getDate();
-  const [voidDays, setVoidDays] = useState(
-    Array(firstDayMonthPosition()).fill(undefined),
-  );
+  const [voidDays, setVoidDays] = useState(firstDayMonthPosition(keepMonth));
   const [daysPerMonth, setDaysPerMonth] = useState(
-    getMonthDaysPerYear(date.getFullYear()),
+    getMonthDaysPerYear(actualDate.getFullYear()),
   );
   const weekDays = getWeekDaysNames(language);
-  const [monthName, setMonthName] = useState(
-    getMonthName(language, date.getMonth()),
-  );
 
   const backMonth = () => {
-    //setVoidDays(Array(firstDayMonthPosition(date.getMonth())).fill(undefined));
+    actualDate.setMonth(keepMonth - 1);
+    const date = new Date(
+      actualDate.getFullYear(),
+      actualDate.getMonth(),
+      actualDate.getDate(),
+    );
+    changeDay(date);
+    forChangeMonth(actualDate.getMonth());
+    setVoidDays(firstDayMonthPosition(actualDate.getMonth()));
   };
 
   const nextMonth = () => {
-    //setVoidDays(Array(firstDayMonthPosition(date.getMonth())).fill(undefined));
+    actualDate.setMonth(keepMonth + 1);
+    const date = new Date(
+      actualDate.getFullYear(),
+      actualDate.getMonth(),
+      actualDate.getDate(),
+    );
+    changeDay(date);
+    forChangeMonth(actualDate.getMonth());
+    setVoidDays(firstDayMonthPosition(actualDate.getMonth()));
   };
 
   return (
@@ -80,11 +93,19 @@ export const ScheduleModal = ({
               {fakeDay}
             </div>
           ))}
-          {daysPerMonth[date.getMonth()].map((monthDays: Date) => (
+          {daysPerMonth[keepMonth].map((monthDays: Date) => (
             <div
               className={`weekday-number ${
-                today === monthDays.getDate() ? "select" : ""
+                week
+                  .map((days) => days.getDate())
+                  .find((day) => day === monthDays.getDate())
+                  ? "select"
+                  : ""
               }`}
+              onClick={() => {
+                console.log(monthDays);
+                changeDay(monthDays);
+              }}
               key={monthDays.getDate()}
             >
               {monthDays.getDate()}

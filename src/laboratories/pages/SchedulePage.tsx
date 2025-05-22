@@ -52,7 +52,7 @@ export const SchedulePage = () => {
     <>
       {calendaryOpen && (
         <ScheduleModal
-          date={date}
+          {...weekValues}
           language={language}
           exitModal={() => setCalendaryOpen(!calendaryOpen)}
           forChangeMonth={setMonthTitleByNumber}
@@ -89,7 +89,6 @@ export const SchedulePage = () => {
         <main className="main-content">
           <CalendaryBar
             language={language}
-            //date={date}
             forChangeMonth={setMonthTitleByNumber}
             {...weekValues}
           />

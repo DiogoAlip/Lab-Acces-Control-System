@@ -19,9 +19,14 @@ export const useWeek = (month: number, year: number) => {
     setKeepYear(year);
   }, [selectDay]);
 
-  const changeDay = (newDay: Date) => {
-    setSelectDay(newDay.getDate());
-    setWeekDay(newDay.getDay());
+  const changeDay = (newDate: Date) => {
+    const date = newDate.getDate();
+    const month = newDate.getMonth();
+    const year = newDate.getFullYear();
+    setWeek(getWeek(year, month, date));
+    setSelectDay(date);
+    setWeekDay(newDate.getDay());
+    setKeepMonth(month);
   };
 
   const nextWeek = () => {
@@ -59,6 +64,7 @@ export const useWeek = (month: number, year: number) => {
   };
 
   return {
+    actualDate,
     week,
     weekday,
     selectDay,

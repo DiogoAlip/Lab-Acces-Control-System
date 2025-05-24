@@ -1,6 +1,9 @@
-export const getMonthName = (language: string, monthNumber = 0) => {
+export const getMonthName = (language: string, monthNumber: number) => {
   const date = new Date(Date.now());
+  date.setMonth(monthNumber);
   const languageTag = language == "Español" ? "es-ES" : "en-EN";
-  if (monthNumber) date.setMonth(monthNumber);
-  return date.toLocaleString(languageTag, { month: "long" }).toUpperCase();
+  const monthName = date
+    .toLocaleString(languageTag, { month: "long" })
+    .toUpperCase();
+  return monthName;
 };

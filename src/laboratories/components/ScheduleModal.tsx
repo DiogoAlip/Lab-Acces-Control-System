@@ -3,9 +3,10 @@ import { NotificationModal } from "./NotificationModal";
 import { rightarrow, leftarrow } from "../../assets";
 import { getWeekDaysNames, getMonthDaysPerYear } from "../helpers";
 
-const firstDayMonthPosition = (month?: number) => {
+const firstDayMonthPosition = (month: number, year?: number) => {
   const date = new Date(Date.now());
-  if (month) date.setMonth(month);
+  date.setMonth(month);
+  if (year != undefined) date.setFullYear(year);
   date.setDate(1);
   const weekDay = date.getDay() || 7;
   return Array(weekDay - 1).fill(undefined);
@@ -30,14 +31,21 @@ export const ScheduleModal = ({
   week: Date[];
   changeDay: (newDate: Date) => void;
 }) => {
-  const [voidDays, setVoidDays] = useState(firstDayMonthPosition(keepMonth));
+  const [voidDays, setVoidDays] = useState(
+    firstDayMonthPosition(keepMonth, actualDate.getFullYear()),
+  );
   const [daysPerMonth, setDaysPerMonth] = useState(
     getMonthDaysPerYear(actualDate.getFullYear()),
   );
   const weekDays = getWeekDaysNames(language);
 
-  const backMonth = () => {
-    actualDate.setMonth(keepMonth - 1);
+  const changeMonth = (orientation: "back" | "next") => {
+    const actualYear = actualDate.getFullYear();
+    actualDate.setMonth(orientation == "back" ? keepMonth - 1 : keepMonth + 1);
+    const changedYear = actualDate.getFullYear();
+    if (actualYear != changedYear) {
+      setDaysPerMonth(getMonthDaysPerYear(actualDate.getFullYear()));
+    }
     const date = new Date(
       actualDate.getFullYear(),
       actualDate.getMonth(),
@@ -45,19 +53,9 @@ export const ScheduleModal = ({
     );
     changeDay(date);
     forChangeMonth(actualDate.getMonth());
-    setVoidDays(firstDayMonthPosition(actualDate.getMonth()));
-  };
-
-  const nextMonth = () => {
-    actualDate.setMonth(keepMonth + 1);
-    const date = new Date(
-      actualDate.getFullYear(),
-      actualDate.getMonth(),
-      actualDate.getDate(),
+    setVoidDays(
+      firstDayMonthPosition(actualDate.getMonth(), actualDate.getFullYear()),
     );
-    changeDay(date);
-    forChangeMonth(actualDate.getMonth());
-    setVoidDays(firstDayMonthPosition(actualDate.getMonth()));
   };
 
   return (
@@ -68,7 +66,7 @@ export const ScheduleModal = ({
             src={leftarrow}
             className="little-image"
             alt=""
-            onClick={backMonth}
+            onClick={() => changeMonth("back")}
           />
           <h1 className="pointered" onClick={exitModal}>
             {month}
@@ -77,7 +75,7 @@ export const ScheduleModal = ({
             src={rightarrow}
             className="little-image"
             alt=""
-            onClick={nextMonth}
+            onClick={() => changeMonth("next")}
           />
         </div>
         <div className="weekdays">

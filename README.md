@@ -8,28 +8,28 @@ Un sistema moderno e interactivo para la gestión, reserva y control de acceso a
 
 El **Laboratory Access Control System (LACS)** responde a la necesidad de coordinar eficientemente el uso de espacios de laboratorio. Sus principales objetivos son:
 
-* **Gestión de Peticiones y Reservas**: Permitir a docentes y estudiantes solicitar el uso de ambientes de laboratorio para clases de recuperación, exámenes o sesiones de investigación.
-* **Control de Disponibilidad en Tiempo Real**: Determinar automáticamente el estado de cada laboratorio (*Libre* / *Ocupado*) según la fecha, hora actual y las peticiones aprobadas.
-* **Aprobación de Solicitudes**: Otorgar a los supervisores/encargados de laboratorio el control para aceptar o rechazar solicitudes de ambiente.
-* **Registro de Asistencia y Justificaciones**: Llevar el seguimiento de asistencia de los participantes en cada sesión reservada, junto con el motivo en caso de inasistencias.
-* **Estadísticas y Reportes**: Visualizar información cuantitativa sobre el uso de ambientes e indicadores clave.
-* **Soporte Multilingüe**: Interfaz adaptable con soporte para múltiples idiomas (Español e Inglés).
+- **Gestión de Peticiones y Reservas**: Permitir a docentes y estudiantes solicitar el uso de ambientes de laboratorio para clases de recuperación, exámenes o sesiones de investigación.
+- **Control de Disponibilidad en Tiempo Real**: Determinar automáticamente el estado de cada laboratorio (_Libre_ / _Ocupado_) según la fecha, hora actual y las peticiones aprobadas.
+- **Aprobación de Solicitudes**: Otorgar a los supervisores/encargados de laboratorio el control para aceptar o rechazar solicitudes de ambiente.
+- **Registro de Asistencia y Justificaciones**: Llevar el seguimiento de asistencia de los participantes en cada sesión reservada, junto con el motivo en caso de inasistencias.
+- **Estadísticas y Reportes**: Visualizar información cuantitativa sobre el uso de ambientes e indicadores clave.
+- **Soporte Multilingüe**: Interfaz adaptable con soporte para múltiples idiomas (Español e Inglés).
 
 ---
 
 ## 🛠️ Herramientas y Tecnologías Usadas
 
-| Categoría | Tecnología / Librería | Descripción |
-| :--- | :--- | :--- |
-| **Gestor de Paquetes** | [pnpm](https://pnpm.io/) *(Recomendado)* / npm / Bun / Yarn | Gestión eficiente y rápida de dependencias. |
-| **Frontend Core** | [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) | Biblioteca de UI con tipado estático estricto. |
-| **Build Tool** | [Vite](https://vitejs.dev/) (`@vitejs/plugin-react-swc`) | Entorno de desarrollo rápido y empaquetado optimizado con SWC. |
-| **Estado Global** | [Redux Toolkit](https://redux-toolkit.js.org/) | Gestión centralizada de estados y lógica asíncrona (*slices* y *thunks*). |
-| **Enrutamiento** | [Wouter](https://github.com/molefrog/wouter) | Enrutador liviano y flexible para React. |
-| **Backend & DB** | [Firebase](https://firebase.google.com/) | Firebase Authentication para sesiones y Firestore para base de datos NoSQL. |
-| **Estilos** | Vanilla CSS | Estilos CSS personalizados por componente y página. |
-| **Testing** | [Vitest](https://vitest.dev/) + Testing Library | Pruebas unitarias y de integración con entorno Happy DOM. |
-| **Linter** | [ESLint](https://eslint.org/) | Calidad y estándares de código para TypeScript y React. |
+| Categoría              | Tecnología / Librería                                                          | Descripción                                                                 |
+| :--------------------- | :----------------------------------------------------------------------------- | :-------------------------------------------------------------------------- |
+| **Gestor de Paquetes** | [pnpm](https://pnpm.io/) _(Recomendado)_ / npm / Bun / Yarn                    | Gestión eficiente y rápida de dependencias.                                 |
+| **Frontend Core**      | [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) | Biblioteca de UI con tipado estático estricto.                              |
+| **Build Tool**         | [Vite](https://vitejs.dev/) (`@vitejs/plugin-react-swc`)                       | Entorno de desarrollo rápido y empaquetado optimizado con SWC.              |
+| **Estado Global**      | [Redux Toolkit](https://redux-toolkit.js.org/)                                 | Gestión centralizada de estados y lógica asíncrona (_slices_ y _thunks_).   |
+| **Enrutamiento**       | [Wouter](https://github.com/molefrog/wouter)                                   | Enrutador liviano y flexible para React.                                    |
+| **Backend & DB**       | [Firebase](https://firebase.google.com/)                                       | Firebase Authentication para sesiones y Firestore para base de datos NoSQL. |
+| **Estilos**            | Vanilla CSS                                                                    | Estilos CSS personalizados por componente y página.                         |
+| **Testing**            | [Vitest](https://vitest.dev/) + Testing Library                                | Pruebas unitarias y de integración con entorno Happy DOM.                   |
+| **Linter**             | [ESLint](https://eslint.org/)                                                  | Calidad y estándares de código para TypeScript y React.                     |
 
 ---
 
@@ -69,25 +69,67 @@ Lab-Acces-Control-System/
 
 La persistencia de datos se gestiona mediante **Firebase Firestore** (Base de Datos NoSQL basada en documentos y colecciones).
 
-![Estructura de la Base de Datos](./estructure_DB.png)
-
 ### Colecciones Principales y Esquema
 
+```mermaid
+erDiagram
+    peticiones ||--|{ asistencias : "contiene (Subcolección 1:N)"
+
+    usuarios {
+        string uid PK "ID de Firebase Auth"
+        string telefono
+        string fechaIntegracion
+        string rol "alumno | docente"
+        map perfilDocente "Opcional (si rol == docente)"
+        string bibliografia "perfilDocente.bibliografia"
+        string areaTrabajo "perfilDocente.areaTrabajo"
+        string ramaPerteneciente "perfilDocente.ramaPerteneciente"
+        string gradoMaximo "perfilDocente.gradoMaximo"
+    }
+
+    laboratorios {
+        string id PK
+        string docenteId FK "Ref -> usuarios/uid"
+        string nombre
+        string estado "disponible | ocupado"
+    }
+
+    peticiones {
+        string id PK
+        string usuarioId FK "Ref -> usuarios/uid (Solicitante)"
+        string laboratorioId FK "Ref -> laboratorios/id"
+        string titulo
+        string asignatura
+        string fecha
+        string hora
+        string estado "pendiente | aceptada (actividad) | rechazada"
+    }
+
+    asistencias {
+        string id PK "Ubicación: peticiones/{id}/asistencias/{id}"
+        string alumnoId FK "Ref -> usuarios/uid"
+        string estado "presente | ausente | justificado"
+        string motivo
+    }
+
+```
+
 1. **`users` (Usuarios)**
-   * Contiene los perfiles de los usuarios del sistema (Estudiantes, Docentes Investigadores, Administradores/Supervisores).
-   * Campos principales: `uid`, `displayName`, `email`, `role`, `photoURL`.
+   - Contiene los perfiles de los usuarios del sistema (Estudiantes, Docentes Investigadores, Administradores/Supervisores).
+   - Campos principales: `uid`, `displayName`, `email`, `role`, `photoURL`.
 
 2. **`laboratorios` (Laboratorios)**
-   * Representa los ambientes físicos (ej. Lab. Software, Lab. Redes I y II, Lab. Ciberseguridad, Lab. Estadística).
-   * Estado dinámico: **`busy`** (Ocupado) o **`free`** (Libre) evaluado automáticamente según el rango horario de las reservas aceptadas en la fecha actual.
+   - Representa los ambientes físicos (ej. Lab. Software, Lab. Redes I y II, Lab. Ciberseguridad, Lab. Estadística).
+   - Estado dinámico: **`busy`** (Ocupado) o **`free`** (Libre) evaluado automáticamente según el rango horario de las reservas aceptadas en la fecha actual.
 
 3. **`petitions` / `peticiones` (Solicitudes de Ambiente)**
-   * Registro de reservas generadas por estudiantes o docentes.
-   * Campos principales: `id_petition`, `id_student`/`id_docente`, `id_laboratory`, `date`, `time_range`, `status` (`pending` \| `accepted` \| `rejected`).
+   - Registro de reservas generadas por estudiantes o docentes.
+   - Campos principales: `id_petition`, `id_student`/`id_docente`, `id_laboratory`, `date`, `time_range`, `status` (`pending` \| `accepted` \| `rejected`).
 
 4. **`attendances` (Asistencias)**
-   * Subcolección o arreglo estructurado dentro de cada petición reservada para controlar el ingreso de los estudiantes.
-   * Estructura del objeto de asistencia:
+   - Subcolección o arreglo estructurado dentro de cada petición reservada para controlar el ingreso de los estudiantes.
+   - Estructura del objeto de asistencia:
+
      ```json
      [
        {
@@ -107,9 +149,10 @@ Sigue estos pasos para instalar y ejecutar el proyecto en tu entorno local:
 ### 1. Requisitos Previos
 
 Asegúrate de tener instalado:
-* **Node.js** (v18.0.0 o superior)
-* **pnpm** *(Recomendado)*: `npm install -g pnpm`
-* Alternativamente: **npm**, **Bun** o **Yarn**
+
+- **Node.js** (v18.0.0 o superior)
+- **pnpm** _(Recomendado)_: `npm install -g pnpm`
+- Alternativamente: **npm**, **Bun** o **Yarn**
 
 ### 2. Clonar el Repositorio
 
@@ -120,12 +163,14 @@ cd Lab-Acces-Control-System
 
 ### 3. Instalar Dependencias
 
-Con **pnpm** *(Recomendado)*:
+Con **pnpm** _(Recomendado)_:
+
 ```bash
 pnpm install
 ```
 
 Otras alternativas:
+
 ```bash
 npm install
 # o con Bun
@@ -151,10 +196,10 @@ Abre tu navegador e ingresa a: `http://localhost:5173`
 
 ## 📜 Comandos Disponibles
 
-*(Ejemplo usando `pnpm`, también puedes usar `npm`, `bun` o `yarn`)*
+_(Ejemplo usando `pnpm`, también puedes usar `npm`, `bun` o `yarn`)_
 
-* `pnpm run dev`: Inicia el servidor de desarrollo local con Vite.
-* `pnpm run build`: Compila el proyecto para producción.
-* `pnpm run preview`: Previsualiza la build de producción localmente.
-* `pnpm run test`: Ejecuta la suite de pruebas unitarias con Vitest.
-* `pnpm run lint`: Realiza el análisis estático de código con ESLint.
+- `pnpm run dev`: Inicia el servidor de desarrollo local con Vite.
+- `pnpm run build`: Compila el proyecto para producción.
+- `pnpm run preview`: Previsualiza la build de producción localmente.
+- `pnpm run test`: Ejecuta la suite de pruebas unitarias con Vitest.
+- `pnpm run lint`: Realiza el análisis estático de código con ESLint.

@@ -21,6 +21,7 @@ El **Laboratory Access Control System (LACS)** responde a la necesidad de coordi
 
 | Categoría | Tecnología / Librería | Descripción |
 | :--- | :--- | :--- |
+| **Gestor de Paquetes** | [pnpm](https://pnpm.io/) *(Recomendado)* / npm / Bun / Yarn | Gestión eficiente y rápida de dependencias. |
 | **Frontend Core** | [React 18](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/) | Biblioteca de UI con tipado estático estricto. |
 | **Build Tool** | [Vite](https://vitejs.dev/) (`@vitejs/plugin-react-swc`) | Entorno de desarrollo rápido y empaquetado optimizado con SWC. |
 | **Estado Global** | [Redux Toolkit](https://redux-toolkit.js.org/) | Gestión centralizada de estados y lógica asíncrona (*slices* y *thunks*). |
@@ -107,7 +108,8 @@ Sigue estos pasos para instalar y ejecutar el proyecto en tu entorno local:
 
 Asegúrate de tener instalado:
 * **Node.js** (v18.0.0 o superior)
-* **npm** (incluido con Node.js), **Yarn** o **Bun**
+* **pnpm** *(Recomendado)*: `npm install -g pnpm`
+* Alternativamente: **npm**, **Bun** o **Yarn**
 
 ### 2. Clonar el Repositorio
 
@@ -118,18 +120,17 @@ cd Lab-Acces-Control-System
 
 ### 3. Instalar Dependencias
 
-Con **npm**:
+Con **pnpm** *(Recomendado)*:
+```bash
+pnpm install
+```
+
+Otras alternativas:
 ```bash
 npm install
-```
-
-O si usas **Bun**:
-```bash
+# o con Bun
 bun install
-```
-
-O con **Yarn**:
-```bash
+# o con Yarn
 yarn install
 ```
 
@@ -140,7 +141,8 @@ Verifica que el archivo `src/firebase/config.ts` contenga las credenciales váli
 ### 5. Iniciar el Servidor de Desarrollo
 
 ```bash
-npm run dev
+pnpm run dev
+# o npm run dev
 ```
 
 Abre tu navegador e ingresa a: `http://localhost:5173`
@@ -149,8 +151,10 @@ Abre tu navegador e ingresa a: `http://localhost:5173`
 
 ## 📜 Comandos Disponibles
 
-* `npm run dev`: Inicia el servidor de desarrollo local con Vite.
-* `npm run build`: Compila el proyecto para producción.
-* `npm run preview`: Previsualiza la build de producción localmente.
-* `npm run test`: Ejecuta la suite de pruebas unitarias con Vitest.
-* `npm run lint`: Realiza el análisis estático de código con ESLint.
+*(Ejemplo usando `pnpm`, también puedes usar `npm`, `bun` o `yarn`)*
+
+* `pnpm run dev`: Inicia el servidor de desarrollo local con Vite.
+* `pnpm run build`: Compila el proyecto para producción.
+* `pnpm run preview`: Previsualiza la build de producción localmente.
+* `pnpm run test`: Ejecuta la suite de pruebas unitarias con Vitest.
+* `pnpm run lint`: Realiza el análisis estático de código con ESLint.

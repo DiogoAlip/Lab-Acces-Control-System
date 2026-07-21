@@ -3,12 +3,18 @@ import { useEffect, useMemo, useState } from "react";
 type targetType = { name: string; value: string };
 type FormType = Record<string, string | null>;
 
-export const useForm = (
-  formFields = {} as Record<string, string>,
-  formValidator = {} as Record<string, [(name: string) => boolean, string]>
+export const useForm = <
+  T extends Record<string, string>,
+  V extends Record<string, [(val: string) => boolean, string]> = Record<
+    string,
+    [(val: string) => boolean, string]
+  >
+>(
+  formFields: T = {} as T,
+  formValidator: V = {} as V
 ) => {
-  const [initialDataForm, setDataForm] = useState(formFields);
-  const [formValid, setFormValid] = useState({} as FormType);
+  const [initialDataForm, setDataForm] = useState<T>(formFields);
+  const [formValid, setFormValid] = useState<FormType>({});
 
   useEffect(() => {
     createValidator();
@@ -20,7 +26,7 @@ export const useForm = (
   };
 
   const resetForm = () => {
-    setDataForm(initialDataForm);
+    setDataForm(formFields);
   };
 
   const isFormValid = useMemo(() => {
@@ -49,5 +55,12 @@ export const useForm = (
     resetForm,
     onChangeField,
     isFormValid,
-  };
+  } as {
+    initialDataForm: T;
+    formValid: FormType;
+    resetForm: () => void;
+    onChangeField: ({ target }: { target: targetType }) => void;
+    isFormValid: boolean;
+  } & T & { [K in keyof V as `${Extract<K, string>}Valid`]: string | null };
 };
+

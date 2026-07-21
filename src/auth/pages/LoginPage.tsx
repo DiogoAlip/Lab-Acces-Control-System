@@ -5,14 +5,18 @@ import { Link } from "wouter";
 import { useForm } from "../hooks/useForm";
 import { startLogginUser } from "../../store/thunks";
 import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store";
 
 const initialForm = { name: "", password: "" };
 const initialFormValidator = {
-  name: [(nameValue: string) => nameValue.length > 3, "el nombre es muy corto"],
+  name: [(nameValue: string) => nameValue.length > 3, "el nombre es muy corto"] as [
+    (nameValue: string) => boolean,
+    string
+  ],
   password: [
     (passwordValue: string) => passwordValue.length > 3,
     "la contraseña es muy corta",
-  ],
+  ] as [(passwordValue: string) => boolean, string],
 };
 
 export const LoginPage = () => {
@@ -21,9 +25,9 @@ export const LoginPage = () => {
 
   const [RememberPassw, setRememberPassw] = useState(false);
   const [attempedSubmit, setAttempedSubmit] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { errorMessage } = useSelector(
-    (state: { auth: { errorMessage: string } }) => state.auth
+    (state: RootState) => state.auth
   );
 
   const onClickStartSession = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -48,7 +52,7 @@ export const LoginPage = () => {
       </header>
       <div className="login-modal">
         <form className="login" action="" onSubmit={() => {}}>
-          {nameValid && attempedSubmit ? <label>{nameValid}</label> : false}
+          {nameValid && attempedSubmit ? <label>{nameValid}</label> : null}
           <div className="name-container">
             <div className="little-image_container">
               <img src={user} alt="" />
@@ -64,9 +68,7 @@ export const LoginPage = () => {
           </div>
           {passwordValid && attempedSubmit ? (
             <label>{passwordValid}</label>
-          ) : (
-            false
-          )}
+          ) : null}
           <div className="password-container">
             <div className="little-image_container">
               <img src={lock} alt="" />
@@ -91,7 +93,7 @@ export const LoginPage = () => {
             </div>
             <Link to="/register">¿Olvido su contraseña?</Link>
           </div>
-          {errorMessage ? <p id="error-login-message">{errorMessage}</p> : true}
+          {errorMessage ? <p id="error-login-message">{errorMessage}</p> : null}
           <button onClick={(e) => onClickStartSession(e)}>
             Iniciar Session
           </button>
@@ -100,3 +102,4 @@ export const LoginPage = () => {
     </div>
   );
 };
+

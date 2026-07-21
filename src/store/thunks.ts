@@ -8,7 +8,10 @@ export const startLogginUser = (name: string, password: string) => {
 
   return async (dispatch: Dispatch) => {
     dispatch(checkingCredencials());
-    const response = await loggingWithEmailPassword({ email, password });
+    const response = await loggingWithEmailPassword({
+      email: name.includes("@unas.edu.pe") ? name : email,
+      password,
+    });
     const { ok, errorMessage } = response;
     if (!ok) {
       dispatch(logout({ errorMessage }));
